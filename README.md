@@ -32,7 +32,7 @@ data from Kaggle's Titanic training competition.
 
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Ml2.Arff;
+    using PicNetML.Arff;
     
     namespace TestingProjectName {
         public class TitanicRow {
@@ -72,8 +72,8 @@ Random Forest classifier on this data.
 
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Ml2;
-    using Ml2.Arff;
+    using PicNetML;
+    using PicNetML.Arff;
     
     namespace TestNuget
     {
@@ -173,7 +173,7 @@ If you would like to contribute a patch or would just rather work directly out
 of git just follow these steps:
 
 - Clone the repo: git clone https://github.com/PicNet/PicNetML.git
-- Reference the Ml2 project in your project
+- Reference the PicNetML project in your project
 - Add a reference to all DLLs in the lib directory (root directory only)
 - That’s it, that's all the NuGet package does
 

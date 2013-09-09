@@ -1,0 +1,28 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+using weka.core;
+
+// ReSharper disable once CheckNamespace
+namespace PicNetML.AttrSel.Algs
+{
+  public class Algorithms
+  {
+    private readonly Runtime rt;    
+    public Algorithms(Runtime rt) { 
+      this.rt = rt;
+    }   
+
+<# foreach (var alg in AllAgorithms) { #>
+    /// <summary>
+    /// <#= alg.GetClassDescription("    /// ") #>
+    /// </summary>
+    public <#= alg.TypeName #> <#= alg.TypeName #> { get { 
+      return new <#= alg.TypeName #>(rt); 
+    } }
+
+<# } #>    
+  }
+}

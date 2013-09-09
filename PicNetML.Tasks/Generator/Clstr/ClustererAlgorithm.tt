@@ -1,0 +1,33 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+using weka.core;
+using weka.clusterers;
+
+// ReSharper disable once CheckNamespace
+namespace PicNetML.Clstr
+{
+  /// <summary>
+  /// <#= Model.GetClassDescription("  /// ") #>
+  /// </summary>
+  public class <#= Model.TypeName #> : BaseClusterer<<#= Model.ImplTypeName #>>
+  {    
+    public <#= Model.TypeName #>(Runtime rt) : base(rt, new <#= Model.ImplTypeName #>()) {
+      <#= Model.ConstructorContent #>
+    }
+
+<# Array.ForEach(Model.Setters, o => { #>
+    <#= o.SetterCode #>
+
+<# }); #>            
+
+<# Array.ForEach(Model.Enumerations, e => { #>
+    public enum <#= e.Name #> {
+      <#= String.Join(",\n      ", e.Values.Select(v => v.Key + " = " + v.Value)) #>
+    }
+
+<# }); #>        
+  }
+}

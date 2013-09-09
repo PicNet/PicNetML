@@ -1,0 +1,24 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+// ReSharper disable once CheckNamespace
+namespace PicNetML.Fltr
+{
+  public class <#= TypeName #>
+  {
+    private readonly Runtime rt;    
+    public <#= TypeName #>(Runtime rt) { this.rt = rt; }   
+
+<# foreach (var ctr in AllFilters) { #>
+    /// <summary>
+    /// <#= ctr.GetClassDescription("    /// ") #>
+    /// </summary>
+    public <#= ctr.TypeName #> <#= ctr.TypeName #> { get {
+      return new <#= ctr.TypeName #>(rt); 
+    } }
+
+<# } #>    
+  }
+}
