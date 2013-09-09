@@ -175,7 +175,7 @@ of git just follow these steps:
 - Clone the repo: git clone https://github.com/PicNet/PicNetML.git
 - Reference the Ml2 project in your project
 - Add a reference to all DLLs in the lib directory (root directory only)
-- Thats it, that all the NuGet package does.
+- Thats it, that's all the NuGet package does
 
 Comments
 --------
