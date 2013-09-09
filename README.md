@@ -2,8 +2,8 @@ PicNetML
 ========
 PicNetML is a .Net wrapper for the [Weka](http://www.cs.waikato.ac.nz/ml/weka/) 
 project.  It tries to address several shortcomings of Weka:
-* Its not .Net
-* Some parts of the API could be a little easire to use
+* It’s not .Net
+* Some parts of the API could be a little easier to use
 * Working with files other than ARFF can be a little painful
 
 License
@@ -175,7 +175,26 @@ of git just follow these steps:
 - Clone the repo: git clone https://github.com/PicNet/PicNetML.git
 - Reference the Ml2 project in your project
 - Add a reference to all DLLs in the lib directory (root directory only)
-- Thats it, that's all the NuGet package does
+- That’s it, that's all the NuGet package does
+
+Navigating Around PicNetML
+--------------------------
+Navigation and auto-discovery was one of the main drivers for creating PicNetML.
+You just need to start with a Runtime and the easiest way to do this is to load
+a runtime like shown in the quick start above.  Once you have a runtim you then
+have 5 major directions you can go:
+
+* runtime.AttributeSelections - All the attribute selection algorithms, 
+  including all supervised and unsupervised algorithms. 
+* runtime.Clusterers - Clustering algorithms.
+* runtime.Filters - Attribute and instance filtering algorithms.
+* runtime.Associations - Association rule mining algorithms.
+* runtime.Classifiers - Classifiers and regressions.
+
+Please use your IDE at this stage.  There are comprehensive comments describing
+all algorithms (thanks to Weka for their diligence in this area).  Just hover
+your mouse over an algorithm and read the docs.  Using this technique you will
+quickly find what you are after.
 
 Comments
 --------
