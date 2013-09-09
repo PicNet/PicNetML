@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>PicNetML</id>
-    <version>0.0.10</version>
+    <version>0.0.12</version>
     <authors>guidot</authors>
     <owners>guidot</owners>
     <licenseUrl>http://www.gnu.org/licenses/gpl.html</licenseUrl>

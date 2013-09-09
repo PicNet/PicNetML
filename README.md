@@ -167,6 +167,16 @@ reusing it later.  This is shown by the 2 tests below.
     }
 
 
+Using the Source
+----------------
+If you would like to contribute a patch or would just rather work directly out
+of git just follow these steps:
+
+- Clone the repo: git clone https://github.com/PicNet/PicNetML.git
+- Reference the Ml2 project in your project
+- Add a reference to all DLLs in the lib directory (root directory only)
+- Thats it, that all the NuGet package does.
+
 Comments
 --------
 This project is used by PicNet for all exploratory analysis of data.  We then 
