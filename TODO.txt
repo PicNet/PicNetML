@@ -1,0 +1,9 @@
+TODO
+====
+- Change classifier index in Runtime constructor to be a string with the 
+    property name. Indexes are not nice.
+- Profile!!!!!!! and IL replace dodgy java code.  Would be awesome to use 
+  Intel MKL to do linear algebra stuff.  Plenty of linear algebra libs already 
+  have this support so the only tricky part is ripping matrix/vector maths out 
+  of weka and injecting ours.  May not be possible, but would be awesome to 
+  get scikit-learn style performance for classifications.

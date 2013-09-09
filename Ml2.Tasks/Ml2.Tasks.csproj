@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9549955-79B5-4FBD-A2C0-404E9313EB91}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ml2.Tasks</RootNamespace>
+    <AssemblyName>Ml2.Tasks</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="IKVM.OpenJDK.Beans">
+      <HintPath>..\lib\weka\IKVM.OpenJDK.Beans.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Core">
+      <HintPath>..\lib\weka\IKVM.OpenJDK.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Remoting">
+      <HintPath>..\lib\weka\IKVM.OpenJDK.Remoting.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.SwingAWT">
+      <HintPath>..\lib\weka\IKVM.OpenJDK.SwingAWT.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Text">
+      <HintPath>..\lib\weka\IKVM.OpenJDK.Text.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.Util">
+      <HintPath>..\lib\weka\IKVM.OpenJDK.Util.dll</HintPath>
+    </Reference>
+    <Reference Include="IKVM.OpenJDK.XML.API">
+      <HintPath>..\lib\weka\IKVM.OpenJDK.XML.API.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\lib\NUnit\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="weka, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\weka\weka.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Generator\Core\CoreClass.cs">
+      <DependentUpon>CoreClass.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Core\CoreClassModel.cs" />
+    <Compile Include="Generator\Asstn\AssociationAlgorithm.cs">
+      <DependentUpon>AssociationAlgorithm.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Asstn\AssociationAlgorithmModel.cs" />
+    <Compile Include="Generator\Asstn\Associations.cs">
+      <DependentUpon>Associations.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Asstn\AssociationsModel.cs" />
+    <Compile Include="Generator\AttrSel\EvaluatorsModel.cs" />
+    <Compile Include="Generator\AttrSel\Evaluators.cs">
+      <DependentUpon>Evaluators.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\AttrSel\AttributeSelectionEvaluator.cs">
+      <DependentUpon>AttributeSelectionEvaluator.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\AttrSel\AttributeSelectionEvaluatorModel.cs" />
+    <Compile Include="Generator\Clstr\ClustererAlgorithm.cs">
+      <DependentUpon>ClustererAlgorithm.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Clstr\ClustererAlgorithmModel.cs" />
+    <Compile Include="Generator\Clstr\Clusterers.cs">
+      <DependentUpon>Clusterers.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Clstr\ClusterersModel.cs" />
+    <Compile Include="Generator\Clss\ClassifierAlgorithm.cs">
+      <DependentUpon>ClassifierAlgorithm.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Clss\ClassifierAlgorithmModel.cs" />
+    <Compile Include="Generator\Clss\Classifiers.cs">
+      <DependentUpon>Classifiers.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Clss\ClassifiersModel.cs" />
+    <Compile Include="Generator\Fltr\FilterAlgorithm.cs">
+      <DependentUpon>FilterAlgorithm.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Fltr\FilterAlgorithmModel.cs" />
+    <Compile Include="Generator\Fltr\Filters.cs">
+      <DependentUpon>Filters.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\Fltr\FiltersModel.cs" />
+    <Compile Include="Generator\ICodeGen.cs" />
+    <Compile Include="Generator\TemplatedSetters.cs" />
+    <Compile Include="Generator\Utils.cs" />
+    <Compile Include="Generator\AttrSel\AttributeSelectionAlgorithm.cs">
+      <DependentUpon>AttributeSelectionAlgorithm.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\AttrSel\AttributeSelectionAlgorithmModel.cs" />
+    <Compile Include="Generator\AttrSel\Algorithms.cs">
+      <DependentUpon>Algorithms.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Generator\AttrSel\AlgorithmsModel.cs" />
+    <Compile Include="Generator\CodeGenerator.cs" />
+    <Compile Include="Generator\SetterModel.cs" />
+    <Compile Include="Generator\IMl2CodeGenerator.cs" />
+    <Compile Include="Generator\WekaTypeModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Generator\Core\CoreClass.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>CoreClass.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Asstn\AssociationAlgorithm.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AssociationAlgorithm.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Asstn\Associations.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Associations.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\AttrSel\Evaluators.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Evaluators.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\AttrSel\AttributeSelectionEvaluator.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AttributeSelectionEvaluator.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\AttrSel\AttributeSelectionAlgorithm.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>AttributeSelectionAlgorithm.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\AttrSel\Algorithms.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Algorithms.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Clstr\ClustererAlgorithm.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ClustererAlgorithm.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Clstr\Clusterers.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Clusterers.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Clss\ClassifierAlgorithm.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>ClassifierAlgorithm.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Clss\Classifiers.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Classifiers.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Fltr\FilterAlgorithm.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>FilterAlgorithm.cs</LastGenOutput>
+    </None>
+    <None Include="Generator\Fltr\Filters.tt">
+      <Generator>TextTemplatingFilePreprocessor</Generator>
+      <LastGenOutput>Filters.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
