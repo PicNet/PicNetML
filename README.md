@@ -2,7 +2,7 @@ PicNetML
 ========
 PicNetML is a .Net wrapper for the [Weka](http://www.cs.waikato.ac.nz/ml/weka/) 
 project.  It tries to address several shortcomings of Weka:
-* It’s not .Net
+* It’s not .Net (PicNetML can be used from C#, VB.Net, F#, etc)
 * Some parts of the API could be a little easier to use
 * Working with files other than ARFF can be a little painful
 

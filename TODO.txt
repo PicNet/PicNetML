@@ -10,3 +10,9 @@ TODO
   have this support so the only tricky part is ripping matrix/vector maths out 
   of weka and injecting ours.  May not be possible, but would be awesome to 
   get scikit-learn style performance for classifications.
+ - Automate the update weka process currently its:
+  + download http://www.cs.waikato.ac.nz/ml/weka/snapshots/developer-branch.zip
+  + unzip weka.jar from developer-branch.zip to lib\weka\weka.jar
+  + run build_weka_dlls.bat
+  + run code generator
+  + run unit tests
