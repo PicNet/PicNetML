@@ -139,6 +139,18 @@ test.csv file to meet the expected format that train.csv uses.
   lines.Insert(0, "Prediction,Index"); // Insert Header Row
   File.WriteAllLines("predictions.csv", lines);      
 }
+
+private string TestLinePreproc(string line) {
+  // Need to add a survived column to test data to meet the contract defined
+  // in TitanicRow below.
+  var tokens = line.Split(',').ToList();
+  tokens.Insert(1, "0");
+  return String.Join(",", tokens);
+}
+
+private string GeneratePredictionLine(double prediction, int index) {
+  return String.Format("{0},{1}", (index + 1), prediction);
+}
 ```
 
 Saving and Reusing Models

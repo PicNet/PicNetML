@@ -13,20 +13,23 @@ namespace PicNetML.Arff
       if(!File.Exists(file)) throw new ArgumentException("file");
 
       var lines = File.ReadAllLines(file);
-      return LoadLines(lines, preprocessor);
+      return LoadLinesImpl(lines, preprocessor);
     }
 
-    public IEnumerable<T> LoadLines(IEnumerable<string> lines, Func<string, string> preprocessor = null)
-    {
+    public IEnumerable<T> LoadLines(IEnumerable<string> lines, Func<string, string> preprocessor = null) {
+      return LoadLinesImpl(lines, preprocessor, false);
+    }
+
+    private static IEnumerable<T> LoadLinesImpl(IEnumerable<string> lines, Func<string, string> preprocessor, bool hasheaders = true) {
       var contents = String.Join("\n", preprocessor == null ? lines : lines.Select(preprocessor));
-      using (var sr = new StringReader(contents)) { return ReadFileImpl(sr); }
+      using (var sr = new StringReader(contents)) { return ReadFileImpl(sr, hasheaders); }
     }
 
-    private static T[] ReadFileImpl(TextReader tr)
+    private static T[] ReadFileImpl(TextReader tr, bool hasheaders)
     {
       var targets = Helpers.GetProps(typeof(T));
       var records = new List<T>();
-      using (var csv = new CsvReader(tr, true))
+      using (var csv = new CsvReader(tr, hasheaders))
       {
         var fieldCount = csv.FieldCount;
         while (csv.ReadNextRecord())

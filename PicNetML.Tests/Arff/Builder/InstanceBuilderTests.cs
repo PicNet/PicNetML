@@ -165,7 +165,7 @@ namespace PicNetML.Tests.Arff.Builder
 
     internal class TestingRow5 {
       public double CLASS { get; set; }
-      [Nominal, AppendHasClassifier(33)] public string ATT_1 { get; set; }    
+      [AppendHasClassifier(33)] public string ATT_1 { get; set; }    
     }
 
     [Test] public void test_has_class_value() {
@@ -247,7 +247,7 @@ namespace PicNetML.Tests.Arff.Builder
 
     // TODO: Finish implementation.  Attributes have duplicate names at the 
     // moment and InstanceBuilder has no implementation.
-    [Test] public void flatten_attribute() {
+    [Test, Ignore("Not Implemented")] public void flatten_attribute() {
       var rows = new [] {
         new FlattenClass { CLASS=0, Att1 = new [] {1,2,3,4,5}},
         new FlattenClass { CLASS=1, Att1 = new [] {6,7,8,9,10}}

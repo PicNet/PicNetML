@@ -10,16 +10,16 @@ namespace PicNetML.Arff
 
   public class AppendHasClassifierAttribute : NominalAttribute {
     internal double Classifier { private set; get; }
-    public AppendHasClassifierAttribute(double classifier) { Classifier = classifier; }
+    public AppendHasClassifierAttribute(double classifier, string csv = null) : base(csv) { Classifier = classifier; }
   }
 
   public class GroupedNominalAttribute : NominalAttribute {
-    internal GroupedNominalAttribute() {} // Only used internally
+    internal GroupedNominalAttribute(string csv = null) : base(csv) {} // Only used internally
   }
 
   public class NominalGroupWhenLessThanAttribute : GroupedNominalAttribute {
     internal int Min { private set; get; }
-    public NominalGroupWhenLessThanAttribute(int min) { 
+    public NominalGroupWhenLessThanAttribute(int min, string csv = null) : base(csv) { 
       if (min <= 1) throw new ArgumentOutOfRangeException("min", min, "Minimum value must be 2 or more.");
       Min = min; 
     }
@@ -27,7 +27,7 @@ namespace PicNetML.Arff
 
   public class NominalGroupMaxBinsAttribute : GroupedNominalAttribute {
     internal int Max { private set; get; }
-    public NominalGroupMaxBinsAttribute (int max) { 
+    public NominalGroupMaxBinsAttribute (int max, string csv = null) : base(csv) { 
       if (max <= 1) throw new ArgumentOutOfRangeException("max", max, "Max value must be > 1");
       Max = max;
     }
