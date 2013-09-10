@@ -131,6 +131,9 @@
     <Compile Include="Clss\Generated\MetaCost.cs" />
     <Compile Include="Clss\IBaseClassifier.cs" />
     <Compile Include="Clss\IUntypedBaseClassifier.cs" />
+    <Compile Include="Clstr\IBaseClusterer.cs" />
+    <Compile Include="Clstr\IUntypedBaseClusterer.cs" />
+    <Compile Include="Clstr\UntypedBaseClusterer.cs" />
     <Compile Include="CombinationRuntimeBuilder.cs" />
     <Compile Include="Fltr\Generated\MergeInfrequentNominalValues.cs" />
     <Compile Include="Fltr\Generated\MergeNominalValues.cs" />

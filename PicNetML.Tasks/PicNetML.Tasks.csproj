@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ICSharpCode.SharpZipLib">
+      <HintPath>..\lib\NUnit\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="IKVM.OpenJDK.Beans, Version=7.2.4630.5, Culture=neutral, PublicKeyToken=13235d27fcbfff58, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\IKVM.OpenJDK.Beans.dll</HintPath>
@@ -181,6 +184,7 @@
     <Compile Include="Generator\IPmlCodeGenerator.cs" />
     <Compile Include="Generator\WekaTypeModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WekaUpdater\Updater.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Generator\Core\CoreClass.tt">
