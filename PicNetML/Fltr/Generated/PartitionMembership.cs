@@ -12,9 +12,9 @@ namespace PicNetML.Fltr
   /// partition generator to use,
   /// e.g.:<br/>		weka.classifiers.trees.J48<br/>	Additional options after the '--'.<br/>	(default: weka.classifiers.trees.J48)
   /// </summary>
-  public class PartitionMembership : BaseFilter<weka.filters.unsupervised.attribute.PartitionMembership>
+  public class PartitionMembership : BaseFilter<weka.filters.supervised.attribute.PartitionMembership>
   {
-    public PartitionMembership(Runtime rt) : base(rt, new weka.filters.unsupervised.attribute.PartitionMembership()) {
+    public PartitionMembership(Runtime rt) : base(rt, new weka.filters.supervised.attribute.PartitionMembership()) {
       
     }
 

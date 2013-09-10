@@ -22,15 +22,16 @@ namespace PicNetML
     public double RootMeanSquaredError { get { return Impl.rootMeanSquaredError(); } }
     public double MeanAbsoluteError { get { return Impl.meanAbsoluteError(); } }
     public double WeightedFMeasure { get { return Impl.weightedFMeasure(); } }
+    public double FMeasure(int classIndex) { return Impl.fMeasure(classIndex); }
     public double WeightedAreaUnderROC { get { return Impl.weightedAreaUnderROC(); } }
+    public double AreaUnderROC(int classIndex) { return Impl.areaUnderROC(classIndex); }
     public double WeightedAreaUnderPRC { get { return Impl.weightedAreaUnderPRC(); } }
+    public double AreaUnderPRC(int classIndex) { return Impl.areaUnderPRC(classIndex); }
     public static string EvaluateModel(IBaseClassifier<Classifier> classifier, string[] options) { return Evaluation.evaluateModel(classifier.Impl, options); }
     public static string EvaluateModel(string classifierString, string[] options) { return Evaluation.evaluateModel(classifierString, options); }
     public Runtime GetHeader { get { return new Runtime(Impl.getHeader()); } }
     public void SetDiscardPredictions(bool value) { Impl.setDiscardPredictions(value); }
     public bool GetDiscardPredictions { get { return Impl.getDiscardPredictions(); } }
-    public double AreaUnderROC(int classIndex) { return Impl.areaUnderROC(classIndex); }
-    public double AreaUnderPRC(int classIndex) { return Impl.areaUnderPRC(classIndex); }
     public double[][] ConfusionMatrix { get { return Impl.confusionMatrix(); } }
     public double EvaluateModelOnceAndRecordPrediction(IBaseClassifier<Classifier> classifier, PmlInstance instance) { return Impl.evaluateModelOnceAndRecordPrediction(classifier.Impl, instance.Impl); }
     public double EvaluateModelOnce(IBaseClassifier<Classifier> classifier, PmlInstance instance) { return Impl.evaluateModelOnce(classifier.Impl, instance.Impl); }
@@ -91,7 +92,6 @@ namespace PicNetML
     public double WeightedRecall { get { return Impl.weightedRecall(); } }
     public double Precision(int classIndex) { return Impl.precision(classIndex); }
     public double WeightedPrecision { get { return Impl.weightedPrecision(); } }
-    public double FMeasure(int classIndex) { return Impl.fMeasure(classIndex); }
     public double UnweightedMacroFmeasure { get { return Impl.unweightedMacroFmeasure(); } }
     public double UnweightedMicroFmeasure { get { return Impl.unweightedMicroFmeasure(); } }
     public void SetPriors(Runtime train) { Impl.setPriors(train.Impl); }

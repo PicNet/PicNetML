@@ -12,7 +12,14 @@ namespace PicNetML.AttrSel.Evals
   /// preferred.<br/><br/>For more information see:<br/><br/>M. A. Hall (1998).
   /// Correlation-based Feature Subset Selection for Machine Learning. Hamilton, New
   /// Zealand.<br/><br/>Options:<br/><br/>-M = 	Treat missing values as a
-  /// separate value.<br/>-L = 	Don't include locally predictive attributes.
+  /// separate value.<br/>-L = 	Don't include locally predictive attributes.<br/>-Z =
+  /// 	Precompute the full correlation matrix at the outset, rather than compute
+  /// correlations lazily (as needed) during the search. Use this in conjuction
+  /// with parallel processing in order to speed up a backward search.<br/>-P
+  /// &lt;int&gt; = 	The size of the thread pool, for example, the number of cores in
+  /// the CPU. (default 1)<br/><br/>-E &lt;int&gt; = 	The number of threads to
+  /// use, which should be >= size of thread pool. (default 1)<br/><br/>-D = 	Output
+  /// debugging info.
   /// </summary>
   public class CfsSubset : BaseAttributeSelectionEvaluator<weka.attributeSelection.CfsSubsetEval>
   {
@@ -37,6 +44,40 @@ namespace PicNetML.AttrSel.Evals
     /// </summary>    
     public CfsSubset LocallyPredictive (bool b) {
       Impl.setLocallyPredictive(b);
+      return this;
+    }
+
+    /// <summary>
+    /// Precompute the full correlation matrix at the outset, rather than compute
+    /// correlations lazily (as needed) during the search. Use this in conjuction
+    /// with parallel processing in order to speed up a backward search.
+    /// </summary>    
+    public CfsSubset PreComputeCorrelationMatrix (bool p) {
+      Impl.setPreComputeCorrelationMatrix(p);
+      return this;
+    }
+
+    /// <summary>
+    /// The size of the thread pool, for example, the number of cores in the CPU.
+    /// </summary>    
+    public CfsSubset PoolSize (int nT) {
+      Impl.setPoolSize(nT);
+      return this;
+    }
+
+    /// <summary>
+    /// The number of threads to use, which should be >= size of thread pool.
+    /// </summary>    
+    public CfsSubset NumThreads (int nT) {
+      Impl.setNumThreads(nT);
+      return this;
+    }
+
+    /// <summary>
+    /// Output debugging info
+    /// </summary>    
+    public CfsSubset Debug (bool d) {
+      Impl.setDebug(d);
       return this;
     }
 

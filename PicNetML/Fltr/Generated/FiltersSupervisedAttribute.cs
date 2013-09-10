@@ -38,14 +38,20 @@ namespace PicNetML.Fltr
     /// evaluator.<br/>	eg. -E "weka.attributeSelection.CfsSubsetEval -L"<br/><br/>Options
     /// specific to evaluator weka.attributeSelection.CfsSubsetEval: = <br/>-M = 	Treat
     /// missing values as a separate value.<br/>-L = 	Don't include locally
-    /// predictive attributes.<br/><br/>Options specific to search
-    /// weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; = 	Specify a starting set of
-    /// attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward | 1 = forward | 2 =
-    /// bi-directional&gt; = 	Direction of search. (default = 1).<br/>-N &lt;num&gt; =
-    /// 	Number of non-improving nodes to<br/>	consider before terminating
-    /// search.<br/>-S &lt;num&gt; = 	Size of lookup cache for evaluated
-    /// subsets.<br/>	Expressed as a multiple of the number of<br/>	attributes in the data set. (default
-    /// = 1)
+    /// predictive attributes.<br/>-Z = 	Precompute the full correlation matrix at the
+    /// outset, rather than compute correlations lazily (as needed) during the search.
+    /// Use this in conjuction with parallel processing in order to speed up a
+    /// backward search.<br/>-P &lt;int&gt; = 	The size of the thread pool, for
+    /// example, the number of cores in the CPU. (default 1)<br/><br/>-E &lt;int&gt; =
+    /// 	The number of threads to use, which should be >= size of thread pool.
+    /// (default 1)<br/><br/>-D = 	Output debugging info.<br/><br/>Options specific to
+    /// search weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; =
+    /// 	Specify a starting set of attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward
+    /// | 1 = forward | 2 = bi-directional&gt; = 	Direction of search. (default =
+    /// 1).<br/>-N &lt;num&gt; = 	Number of non-improving nodes to<br/>	consider
+    /// before terminating search.<br/>-S &lt;num&gt; = 	Size of lookup cache for
+    /// evaluated subsets.<br/>	Expressed as a multiple of the number
+    /// of<br/>	attributes in the data set. (default = 1)
     /// </summary>
     public AttributeSelection AttributeSelection { get {
       return new AttributeSelection(rt); 
@@ -89,6 +95,32 @@ namespace PicNetML.Fltr
     } }
 
     /// <summary>
+    /// Merges values of all nominal attributes among the specified attributes,
+    /// excluding the class attribute, using the CHAID method, but without
+    /// considering to re-split merged subsets. It implements Steps 1 and 2 described by
+    /// Kass (1980), see<br/><br/>Gordon V. Kass (1980). An Exploratory Technique for
+    /// Investigating Large Quantities of Categorical Data. Applied Statistics.
+    /// 29(2):119-127.<br/><br/>Once attribute values have been merged, a chi-squared
+    /// test using the Bonferroni correction is applied to check if the resulting
+    /// attribute is a valid predictor, based on the Bonferroni multiplier in
+    /// Equation 3.2 in Kass (1980). If an attribute does not pass this test, all
+    /// remaining values (if any) are merged. Nevertheless, useless predictors can slip
+    /// through without being fully merged, e.g. identifier attributes.<br/><br/>The
+    /// code applies the Yates correction when the chi-squared statistic is
+    /// computed.<br/><br/>Note that the algorithm is quadratic in the number of attribute
+    /// values for an attribute.<br/><br/>Options:<br/><br/>-D = 	Turns on output
+    /// of debugging information.<br/>-L &lt;double&gt; = 	The significance level
+    /// (default: 0.05).<br/><br/>-R &lt;range&gt; = 	Sets list of attributes to act
+    /// on (or its inverse). 'first and 'last' are accepted as well.'<br/>	E.g.:
+    /// first-5,7,9,20-last<br/>	(default: first-last)<br/>-V = 	Invert matching
+    /// sense (i.e. act on all attributes not specified in list)<br/>-O = 	Use short
+    /// identifiers for merged subsets.
+    /// </summary>
+    public MergeNominalValues MergeNominalValues { get {
+      return new MergeNominalValues(rt); 
+    } }
+
+    /// <summary>
     /// Converts all nominal attributes into binary numeric attributes. An
     /// attribute with k values is transformed into k binary attributes if the class is
     /// nominal (using the one-attribute-per-value approach). Binary attributes are
@@ -104,6 +136,18 @@ namespace PicNetML.Fltr
     /// </summary>
     public NominalToBinary NominalToBinary { get {
       return new NominalToBinary(rt); 
+    } }
+
+    /// <summary>
+    /// A filter that uses a PartitionGenerator to generate partition membership
+    /// values; filtered instances are composed of these values plus the class
+    /// attribute (if set in the input data) and rendered as sparse
+    /// instances.<br/><br/>Options:<br/><br/>-W &lt;name of partition generator&gt; = 	Full name of
+    /// partition generator to use,
+    /// e.g.:<br/>		weka.classifiers.trees.J48<br/>	Additional options after the '--'.<br/>	(default: weka.classifiers.trees.J48)
+    /// </summary>
+    public PartitionMembership PartitionMembership { get {
+      return new PartitionMembership(rt); 
     } }
 
     

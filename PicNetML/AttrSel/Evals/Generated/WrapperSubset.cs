@@ -21,9 +21,12 @@ namespace PicNetML.AttrSel.Evals
   /// mean).<br/>	(default: 0.01 (1%))<br/>-E &lt;acc | rmse | mae | f-meas | auc |
   /// auprc&gt; = 	Performance evaluation measure to use for selecting
   /// attributes.<br/>	(Default = accuracy for discrete class and rmse for numeric
-  /// class)<br/><br/>Options specific to scheme weka.classifiers.rules.ZeroR: = <br/>-D =
-  /// 	If set, classifier is run in debug mode and<br/>	may output additional
-  /// info to the console
+  /// class)<br/>-IRclass &lt;label | index&gt; = 	Optional class value (label or 1-based
+  /// index) to use in conjunction with<br/>	IR statistics (f-meas, auc or
+  /// auprc). Omitting this option will use<br/>	the class-weighted
+  /// average.<br/><br/>Options specific to scheme weka.classifiers.rules.ZeroR: = <br/>-D = 	If
+  /// set, classifier is run in debug mode and<br/>	may output additional info to
+  /// the console
   /// </summary>
   public class WrapperSubset : BaseAttributeSelectionEvaluator<weka.attributeSelection.WrapperSubsetEval>
   {
@@ -60,6 +63,14 @@ namespace PicNetML.AttrSel.Evals
     /// </summary>    
     public WrapperSubset EvaluationMeasure (EEvaluationMeasure newMethod) {
       Impl.setEvaluationMeasure(new weka.core.SelectedTag((int) newMethod, weka.attributeSelection.WrapperSubsetEval.TAGS_EVALUATION));
+      return this;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>    
+    public WrapperSubset IRClassValue (string val) {
+      Impl.setIRClassValue(val);
       return this;
     }
 

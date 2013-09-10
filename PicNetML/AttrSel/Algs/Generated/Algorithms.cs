@@ -42,7 +42,9 @@ namespace PicNetML.AttrSel.Algs
     /// ranked list of attributes.<br/>-T &lt;threshold&gt; = 	Specify a theshold by
     /// which attributes<br/>	may be discarded from the ranking.<br/>	Use in
     /// conjuction with -R<br/>-N &lt;num to select&gt; = 	Specify number of attributes to
-    /// select
+    /// select<br/>-num-slots &lt;int&gt; = 	The number of execution slots, for
+    /// example, the number of cores in the CPU. (default 1)<br/><br/>-D = 	Print
+    /// debugging output
     /// </summary>
     public GreedyStepwise GreedyStepwise { get { 
       return new GreedyStepwise(rt); 

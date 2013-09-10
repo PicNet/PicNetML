@@ -16,11 +16,11 @@ namespace PicNetML.Clstr
   /// weka.clusterers.SimpleKMeans)<br/><br/>Options specific to clusterer weka.clusterers.SimpleKMeans: = <br/>-N
   /// &lt;num&gt; = 	number of clusters.<br/>	(default 2).<br/>-P = 	Initialize using
   /// the k-means++ method.<br/><br/>-V = 	Display std. deviations for
-  /// centroids.<br/><br/>-M = 	Replace missing values with mean/mode.<br/><br/>-A
+  /// centroids.<br/><br/>-M = 	Don't replace missing values with mean/mode.<br/><br/>-A
   /// &lt;classname and options&gt; = 	Distance function to use.<br/>	(default:
   /// weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum number of
-  /// iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables faster
-  /// distance calculations, using cut-off values.<br/>	Disables the
+  /// iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables
+  /// faster distance calculations, using cut-off values.<br/>	Disables the
   /// calculation/output of squared errors/distances.<br/><br/>-num-slots &lt;num&gt; =
   /// 	Number of execution slots.<br/>	(default 1 - i.e. no parallelism)<br/>-S
   /// &lt;num&gt; = 	Random number seed.<br/>	(default 10)

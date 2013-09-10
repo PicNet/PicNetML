@@ -17,7 +17,9 @@ namespace PicNetML.AttrSel.Algs
   /// ranked list of attributes.<br/>-T &lt;threshold&gt; = 	Specify a theshold by
   /// which attributes<br/>	may be discarded from the ranking.<br/>	Use in
   /// conjuction with -R<br/>-N &lt;num to select&gt; = 	Specify number of attributes to
-  /// select
+  /// select<br/>-num-slots &lt;int&gt; = 	The number of execution slots, for
+  /// example, the number of cores in the CPU. (default 1)<br/><br/>-D = 	Print
+  /// debugging output
   /// </summary>
   public class GreedyStepwise : BaseAttributeSelectionAlgorithm<weka.attributeSelection.GreedyStepwise>
   {
@@ -76,6 +78,23 @@ namespace PicNetML.AttrSel.Algs
     /// </summary>    
     public GreedyStepwise NumToSelect (int n) {
       Impl.setNumToSelect(n);
+      return this;
+    }
+
+    /// <summary>
+    /// The number of execution slots, for example, the number of cores in the
+    /// CPU.
+    /// </summary>    
+    public GreedyStepwise NumExecutionSlots (int nT) {
+      Impl.setNumExecutionSlots(nT);
+      return this;
+    }
+
+    /// <summary>
+    /// Output debugging information to the console
+    /// </summary>    
+    public GreedyStepwise DebuggingOutput (bool d) {
+      Impl.setDebuggingOutput(d);
       return this;
     }
 

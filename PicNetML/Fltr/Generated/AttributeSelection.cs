@@ -14,14 +14,20 @@ namespace PicNetML.Fltr
   /// evaluator.<br/>	eg. -E "weka.attributeSelection.CfsSubsetEval -L"<br/><br/>Options
   /// specific to evaluator weka.attributeSelection.CfsSubsetEval: = <br/>-M = 	Treat
   /// missing values as a separate value.<br/>-L = 	Don't include locally
-  /// predictive attributes.<br/><br/>Options specific to search
-  /// weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; = 	Specify a starting set of
-  /// attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward | 1 = forward | 2 =
-  /// bi-directional&gt; = 	Direction of search. (default = 1).<br/>-N &lt;num&gt; =
-  /// 	Number of non-improving nodes to<br/>	consider before terminating
-  /// search.<br/>-S &lt;num&gt; = 	Size of lookup cache for evaluated
-  /// subsets.<br/>	Expressed as a multiple of the number of<br/>	attributes in the data set. (default
-  /// = 1)
+  /// predictive attributes.<br/>-Z = 	Precompute the full correlation matrix at the
+  /// outset, rather than compute correlations lazily (as needed) during the search.
+  /// Use this in conjuction with parallel processing in order to speed up a
+  /// backward search.<br/>-P &lt;int&gt; = 	The size of the thread pool, for
+  /// example, the number of cores in the CPU. (default 1)<br/><br/>-E &lt;int&gt; =
+  /// 	The number of threads to use, which should be >= size of thread pool.
+  /// (default 1)<br/><br/>-D = 	Output debugging info.<br/><br/>Options specific to
+  /// search weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; =
+  /// 	Specify a starting set of attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward
+  /// | 1 = forward | 2 = bi-directional&gt; = 	Direction of search. (default =
+  /// 1).<br/>-N &lt;num&gt; = 	Number of non-improving nodes to<br/>	consider
+  /// before terminating search.<br/>-S &lt;num&gt; = 	Size of lookup cache for
+  /// evaluated subsets.<br/>	Expressed as a multiple of the number
+  /// of<br/>	attributes in the data set. (default = 1)
   /// </summary>
   public class AttributeSelection : BaseFilter<weka.filters.supervised.attribute.AttributeSelection>
   {

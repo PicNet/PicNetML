@@ -125,9 +125,13 @@
     <Compile Include="Clss\Generated\ClassifiersRules.cs" />
     <Compile Include="Clss\Generated\ClassifiersTrees.cs" />
     <Compile Include="Clss\Generated\ClassifiersTreesLmt.cs" />
+    <Compile Include="Clss\Generated\HoeffdingTree.cs" />
     <Compile Include="Clss\Generated\LibLINEAR.cs" />
     <Compile Include="Clss\Generated\MetaCost.cs" />
     <Compile Include="CombinationRuntimeBuilder.cs" />
+    <Compile Include="Fltr\Generated\MergeInfrequentNominalValues.cs" />
+    <Compile Include="Fltr\Generated\MergeNominalValues.cs" />
+    <Compile Include="Fltr\Generated\RenameNominalValues.cs" />
     <Compile Include="Runtime_Classification_and_Evaluation.cs" />
     <Compile Include="Runtime_Custom_Filtering.cs" />
     <Compile Include="Runtime_File_IO.cs" />

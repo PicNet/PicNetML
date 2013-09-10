@@ -317,6 +317,19 @@ namespace PicNetML.Fltr
     } }
 
     /// <summary>
+    /// Merges all values of the specified nominal attribute that are
+    /// sufficiently infrequent.<br/><br/>Options:<br/><br/>-D = 	Turns on output of debugging
+    /// information.<br/>-N &lt;int&gt; = 	The minimum frequency for a value to
+    /// remain (default: 2).<br/><br/>-R &lt;range&gt; = 	Sets list of attributes to
+    /// act on (or its inverse). 'first and 'last' are accepted as
+    /// well.'<br/>	E.g.: first-5,7,9,20-last<br/>	(default: 1,2)<br/>-V = 	Invert matching sense
+    /// (i.e. act on all attributes not specified in list)
+    /// </summary>
+    public MergeInfrequentNominalValues MergeInfrequentNominalValues { get {
+      return new MergeInfrequentNominalValues(rt); 
+    } }
+
+    /// <summary>
     /// Merges many values of a nominal attribute into one
     /// value.<br/><br/>Options:<br/><br/>-C &lt;col&gt; = 	Sets the attribute index<br/>	(default:
     /// last)<br/>-L &lt;label&gt; = 	Sets the label of the newly merged
@@ -471,18 +484,6 @@ namespace PicNetML.Fltr
     } }
 
     /// <summary>
-    /// A filter that uses a PartitionGenerator to generate partition membership
-    /// values; filtered instances are composed of these values plus the class
-    /// attribute (if set in the input data) and rendered as sparse
-    /// instances.<br/><br/>Options:<br/><br/>-W &lt;name of partition generator&gt; = 	Full name of
-    /// partition generator to use,
-    /// e.g.:<br/>		weka.classifiers.trees.J48<br/>	Additional options after the '--'.<br/>	(default: weka.classifiers.trees.J48)
-    /// </summary>
-    public PartitionMembership PartitionMembership { get {
-      return new PartitionMembership(rt); 
-    } }
-
-    /// <summary>
     /// A filter that applies filters on subsets of attributes and assembles the
     /// output into a new dataset. Attributes that are not covered by any of the
     /// ranges can be either retained or removed from the
@@ -622,6 +623,18 @@ namespace PicNetML.Fltr
     /// </summary>
     public RenameAttribute RenameAttribute { get {
       return new RenameAttribute(rt); 
+    } }
+
+    /// <summary>
+    /// Renames the values of nominal attributes.<br/><br/>Options:<br/><br/>-R =
+    /// 	Attributes to act on. Can be either a range<br/>	string (e.g. 1,2,6-10)
+    /// OR a comma-separated list of named attributes<br/>	(default none)<br/>-V =
+    /// 	Invert matching sense (i.e. act on all attributes other than those
+    /// specified)<br/>-N = 	Nominal labels and their replacement values.<br/>	E.g.
+    /// red:blue, black:white, fred:bob<br/>-I = 	Ignore case when matching nominal values
+    /// </summary>
+    public RenameNominalValues RenameNominalValues { get {
+      return new RenameNominalValues(rt); 
     } }
 
     /// <summary>

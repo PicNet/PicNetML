@@ -43,6 +43,7 @@ namespace PicNetML
     public void SetValue(int i, double d) { Impl.setValue(i, d); }
     public string ToString(int i) { return Impl.toString(i); }
     public void SetClassValue(double d) { Impl.setClassValue(d); }
+    public string StringValue(PmlAttribute a) { return Impl.stringValue(a.Impl); }
     public void DeleteAttributeAt(int i) { Impl.deleteAttributeAt(i); }
     public bool EqualHeaders(PmlInstance i) { return Impl.equalHeaders(i.Impl); }
     public string EqualHeadersMsg(PmlInstance i) { return Impl.equalHeadersMsg(i.Impl); }
@@ -57,7 +58,6 @@ namespace PicNetML
     public void SetValue(PmlAttribute a, string str) { Impl.setValue(a.Impl, str); }
     public Runtime RelationalValue(int i) { return new Runtime(Impl.relationalValue(i)); }
     public Runtime RelationalValue(PmlAttribute a) { return new Runtime(Impl.relationalValue(a.Impl)); }
-    public string StringValue(PmlAttribute a) { return Impl.stringValue(a.Impl); }
     public double[] ToDoubleArray { get { return Impl.toDoubleArray(); } }
     public string ToStringNoWeight(int i) { return Impl.toStringNoWeight(i); }
     public string ToStringNoWeight() { return Impl.toStringNoWeight(); }

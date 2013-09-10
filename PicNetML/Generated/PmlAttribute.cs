@@ -24,16 +24,16 @@ namespace PicNetML
     public int Index { get { return Impl.index(); } }
     public object Copy() { return Impl.copy(); }
     public int Type { get { return Impl.type(); } }
+    public int IndexOfValue(string value) { return Impl.indexOfValue(value); }
     public double Weight { get { return Impl.weight(); } }
     public bool IsString { get { return Impl.isString(); } }
-    public int IndexOfValue(string value) { return Impl.indexOfValue(value); }
+    public string EqualsMsg(object other) { return Impl.equalsMsg(other); }
     public static string TypeToString(int type) { return Attribute.typeToString(type); }
     public int AddStringValue(string value) { return Impl.addStringValue(value); }
     public IEnumerable<string> EnumerateValues { get { return Impl.ToEnumerable(); } }
     public bool IsRelationValued { get { return Impl.isRelationValued(); } }
     public Runtime Relation(int valIndex) { return new Runtime(Impl.relation(valIndex)); }
     public string FormatDate(double date) { return Impl.formatDate(date); }
-    public string EqualsMsg(object other) { return Impl.equalsMsg(other); }
     public static string TypeToString(PmlAttribute att) { return Attribute.typeToString(att.Impl); }
     public static string TypeToStringShort(int type) { return Attribute.typeToStringShort(type); }
     public bool IsDate { get { return Impl.isDate(); } }
