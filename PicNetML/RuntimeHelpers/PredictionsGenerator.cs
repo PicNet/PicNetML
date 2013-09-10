@@ -25,7 +25,7 @@ namespace PicNetML.RuntimeHelpers
       for (int i = 0; i < rt.NumInstances; i++) {        
         double classification;
         try {
-          classification = classifier.Classify(rt.Instance(i));          
+          classification = classifier.ClassifyInstance(rt[i]);          
         } catch (Exception) {
           if (exception_value == null) throw;
           classification = exception_value(i);

@@ -112,10 +112,10 @@
     <Compile Include="Asstn\Generated\FPGrowth.cs" />
     <Compile Include="AttrSel\AttributeSelections.cs" />
     <Compile Include="AttrSel\Evals\Generated\LatentSemanticAnalysis.cs" />
+    <Compile Include="Clss\BaseClassifier.cs" />
     <Compile Include="Clss\Classifiers.cs" />
     <Compile Include="Clss\CostMatrix.cs" />
-    <Compile Include="Clss\DelegatingClassifier.cs" />
-    <Compile Include="Clss\EmptyClassifier.cs" />
+    <Compile Include="Clss\DeserialisedClassifier.cs" />
     <Compile Include="Clss\Generated\ClassifiersBayes.cs" />
     <Compile Include="Clss\Generated\ClassifiersBayesNet.cs" />
     <Compile Include="Clss\Generated\ClassifiersFunctions.cs" />
@@ -127,7 +127,10 @@
     <Compile Include="Clss\Generated\ClassifiersTreesLmt.cs" />
     <Compile Include="Clss\Generated\HoeffdingTree.cs" />
     <Compile Include="Clss\Generated\LibLINEAR.cs" />
+    <Compile Include="Clss\Generated\LogisticBase.cs" />
     <Compile Include="Clss\Generated\MetaCost.cs" />
+    <Compile Include="Clss\IBaseClassifier.cs" />
+    <Compile Include="Clss\IUntypedBaseClassifier.cs" />
     <Compile Include="CombinationRuntimeBuilder.cs" />
     <Compile Include="Fltr\Generated\MergeInfrequentNominalValues.cs" />
     <Compile Include="Fltr\Generated\MergeNominalValues.cs" />
@@ -185,7 +188,7 @@
     <Compile Include="Clss\Generated\Bagging.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Clss\BaseClassifier.cs" />
+    <Compile Include="Clss\UntypedBaseClassifier.cs" />
     <Compile Include="Clss\Generated\BayesNet.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -233,7 +236,6 @@
     <Compile Include="Clss\Generated\Logistic.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Clss\Generated\LogisticBase.cs" />
     <Compile Include="Clss\Generated\LogitBoost.cs">
       <SubType>Code</SubType>
     </Compile>

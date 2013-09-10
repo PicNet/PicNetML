@@ -28,8 +28,8 @@ namespace PicNetML.Tests.Clss {
         sex = "male",
         embarked = "C"
       };
-      var prediction = classifier.Classify(row);
-      var proba = classifier.ClassifyProba(row);
+      var prediction = classifier.ClassifyRow(row);
+      var proba = classifier.ClassifyRowProba(row);
       Assert.AreEqual(0, prediction);
       Assert.IsTrue(proba < 0.5);
     }
@@ -77,8 +77,8 @@ namespace PicNetML.Tests.Clss {
         embarked = "C"
       };
       // Classify
-      var prediction = classifier.Classify(Runtime.BuildInstance(0, row));
-      var proba = classifier.ClassifyProba(Runtime.BuildInstance(0, row));
+      var prediction = classifier.ClassifyInstance(Runtime.BuildInstance(0, row));
+      var proba = classifier.ClassifyInstanceProba(Runtime.BuildInstance(0, row));
       
       Assert.AreEqual(0, prediction);
       Assert.IsTrue(proba < 0.5);

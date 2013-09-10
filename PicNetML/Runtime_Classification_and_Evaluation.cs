@@ -59,7 +59,7 @@ namespace PicNetML
     }
 
     public double[] GetClassifications(IBaseClassifier<Classifier> classifier) { 
-      return this.Select(classifier.Classify).ToArray();
+      return this.Select(classifier.ClassifyInstance).ToArray();
     }
   }
 }

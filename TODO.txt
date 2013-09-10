@@ -1,8 +1,5 @@
 TODO
 ====
-- BaseClassifier.Classify<T> throws errors when loading model from disk.  
-  We should have typed and untyped classifiers, not exceptions, i.e. if a method
-  is there you should be able to use it.
 - Change classifier index in Runtime constructor to be a string with the 
     property name. Indexes are not nice.
 - Profile!!!!!!! and IL replace dodgy java code.  Would be awesome to use 

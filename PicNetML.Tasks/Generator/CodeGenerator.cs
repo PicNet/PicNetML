@@ -35,8 +35,7 @@ namespace PicNetML.Tasks.Generator
     [Test] public void GenerateCoreClassWrappers() {
       var dir = PrepDir("Generated");
 
-      RunT4TemplateImpl(new CoreClass("Runtime", typeof(Instances)) {
-      }, dir + @"\Runtime");
+      RunT4TemplateImpl(new CoreClass("Runtime", typeof(Instances)), dir + @"\Runtime");
 
       RunT4TemplateImpl(new CoreClass("PmlInstance", typeof(Instance)) {
         Extends = "IEnumerable<PmlAttribute>",
