@@ -22,7 +22,7 @@ data from Kaggle's Titanic training competition.
 
 * Create a new Unit Test Project
 * Download some [data](http://www.kaggle.com/c/titanic-gettingStarted/download/train.csv)
-  and [this](http://www.kaggle.com/c/titanic-gettingStarted/download/test.csv)
+  and [a bit more](http://www.kaggle.com/c/titanic-gettingStarted/download/test.csv)
 * Use NuGet to install the PicNetML package.
     * Tools -> Library Package Manager -> Manage NuGet Packages for Solution
     * Search for PicNetML
@@ -75,9 +75,9 @@ Random Forest classifier on this data.
     using PicNetML;
     using PicNetML.Arff;
     
-    namespace TestNuget
+    namespace TestingProjectName
     {
-      [TestClass] public class Test
+      [TestClass] public class TestClass
       {
         [TestMethod] public void Evaluate()
         {
@@ -219,5 +219,5 @@ PicNet has a long history of building quality software for large organisations
 analytics part of our offering.  Whether its an embedded prediction model or 
 recommender in a web application or a stand alone system that runs in the 
 background doing predictive work or anomaly detection.  If you have any 
-requirements in this area please feel free to [contact us]
-(http://www.picnet.com.au) and we will help you achieve your data goals.
+requirements in this area please feel free to [contact us](http://www.picnet.com.au) 
+and we will help you achieve your data goals.
