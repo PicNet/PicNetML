@@ -80,7 +80,7 @@ namespace PicNetML.Tests.Clss {
       var prediction = classifier.ClassifyInstance(Runtime.BuildInstance(0, row));
       var proba = classifier.ClassifyInstanceProba(Runtime.BuildInstance(0, row));
       
-      Assert.AreEqual(0, prediction);
+      Assert.AreEqual(0.0, prediction);
       Assert.IsTrue(proba < 0.5);
     }
   }

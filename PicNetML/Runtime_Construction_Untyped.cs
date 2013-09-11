@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PicNetML.Arff;
-using PicNetML.Arff.Builder;
-using PicNetML.RuntimeHelpers;
 using weka.core;
 
 namespace PicNetML
