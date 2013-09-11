@@ -13,10 +13,6 @@ namespace PicNetML
 {
   public partial class <#= ClassName #> <#= String.IsNullOrEmpty(Extends) ? "" : " : " + Extends #>
   {
-  
-    /// <summary>
-    /// This is used to create a new Runtime with a specified set of Instances.
-    /// </summary>
     public <#= ClassName #>(<#= ImplClassName #> impl) { Impl = impl; }
 
     public <#= ImplClassName #> Impl { get; private set; }

@@ -9,10 +9,6 @@ namespace PicNetML
 {
   public partial class PmlEvaluation 
   {
-  
-    /// <summary>
-    /// This is used to create a new Runtime with a specified set of Instances.
-    /// </summary>
     public PmlEvaluation(Evaluation impl) { Impl = impl; }
 
     public Evaluation Impl { get; private set; }

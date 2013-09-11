@@ -8,10 +8,6 @@ namespace PicNetML
 {
   public partial class Runtime 
   {
-  
-    /// <summary>
-    /// This is used to create a new Runtime with a specified set of Instances.
-    /// </summary>
     public Runtime(Instances impl) { Impl = impl; }
 
     public Instances Impl { get; private set; }

@@ -8,10 +8,6 @@ namespace PicNetML
 {
   public partial class PmlInstance  : IEnumerable<PmlAttribute>
   {
-  
-    /// <summary>
-    /// This is used to create a new Runtime with a specified set of Instances.
-    /// </summary>
     public PmlInstance(Instance impl) { Impl = impl; }
 
     public Instance Impl { get; private set; }

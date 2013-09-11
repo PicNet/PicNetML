@@ -18,7 +18,7 @@ namespace PicNetML.Tasks.Generator.Core
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+    #line 1 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
     public partial class CoreClass : CoreClassBase
     {
@@ -30,7 +30,7 @@ namespace PicNetML.Tasks.Generator.Core
         {
             this.Write("using System.Collections;\r\nusing System.Collections.Generic;\r\nusing weka.core;\r\n");
             
-            #line 9 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 9 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AdditionalUsings));
             
             #line default
@@ -38,64 +38,63 @@ namespace PicNetML.Tasks.Generator.Core
             this.Write("\r\n\r\n// ReSharper disable once CheckNamespace\r\nnamespace PicNetML\r\n{\r\n  public par" +
                     "tial class ");
             
-            #line 14 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 14 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
             
             #line default
             #line hidden
             this.Write(" ");
             
-            #line 14 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 14 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(String.IsNullOrEmpty(Extends) ? "" : " : " + Extends));
             
             #line default
             #line hidden
-            this.Write("\r\n  {\r\n  \r\n    /// <summary>\r\n    /// This is used to create a new Runtime with a" +
-                    " specified set of Instances.\r\n    /// </summary>\r\n    public ");
+            this.Write("\r\n  {\r\n    public ");
             
-            #line 20 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 16 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ClassName));
             
             #line default
             #line hidden
             this.Write("(");
             
-            #line 20 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 16 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ImplClassName));
             
             #line default
             #line hidden
             this.Write(" impl) { Impl = impl; }\r\n\r\n    public ");
             
-            #line 22 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 18 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ImplClassName));
             
             #line default
             #line hidden
             this.Write(" Impl { get; private set; }\r\n\r\n");
             
-            #line 24 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 20 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
  foreach (var method in Methods) { 
             
             #line default
             #line hidden
             this.Write("    ");
             
-            #line 25 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 21 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(method));
             
             #line default
             #line hidden
             this.Write("\r\n");
             
-            #line 26 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 22 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
  } 
             
             #line default
             #line hidden
             this.Write("    \r\n\r\n    ");
             
-            #line 28 "J:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
+            #line 24 "j:\dev\projects\picnet\PicNetML\PicNetML.Tasks\Generator\Core\CoreClass.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(AdditionalMethods));
             
             #line default
