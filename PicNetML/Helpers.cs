@@ -45,15 +45,18 @@ namespace PicNetML
     }
 
     public static object GetValue(object o, string prop) {
-      if (o is IExtendableObj<object>) o = ((IExtendableObj<object>)o).BaseObject;
       return o is IGetValue ? 
           ((IGetValue) o).GetValue(prop) : 
           o.GetType().GetProperty(prop).GetValue(o);
     }
 
     public static void SetValue(object target, string prop, object value) {
-      if (target is IExtendableObj<object>) target = ((IExtendableObj<object>)target).BaseObject;
-      target.GetType().GetProperty(prop).SetValue(target, value);
+      if (target is ExtendableObjBase) {
+        var ex = (ExtendableObjBase) target;
+        ex.SetValue(prop, value);
+      } else {
+        target.GetType().GetProperty(prop).SetValue(target, value);
+      }
     }
 
     public static IEnumerable<T> RowsWherePropIsValue<T>(IEnumerable<T> data, string prop, object value) {

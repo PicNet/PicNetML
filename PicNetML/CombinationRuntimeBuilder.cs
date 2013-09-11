@@ -5,16 +5,17 @@ using PicNetML.Arff;
 
 namespace PicNetML
 {
+  // TODO: Implement fully or remove.
   internal class CombinationRuntimeBuilder<T> where T : new()
   {
-    private readonly int classifier;
+    private readonly int classidx;
     private readonly T[] data;
     private readonly string[][] props;
     private readonly int degrees;
 
-    public CombinationRuntimeBuilder(int classifier, T[] data, int[] indexes, int degrees) {
+    public CombinationRuntimeBuilder(int classidx, T[] data, int[] indexes, int degrees) {
       if (degrees != 3) throw new ArgumentException("Only 3 degrees currently supported.", "degrees");      
-      this.classifier = classifier;
+      this.classidx = classidx;
       this.data = data;      
       this.degrees = degrees;
 
@@ -45,7 +46,7 @@ namespace PicNetML
         return ext;
       }).ToArray();
       Console.WriteLine("Created Extended array");
-      return Runtime.LoadFromRows(classifier, extended);
+      return Runtime.LoadFromRows(classidx, extended);
     }
 
     private ICollection<string[]> GetAdditionalProperties(string[] startprops) {

@@ -32,10 +32,19 @@ namespace PicNetML
       return Properties.Select(p => p.Value).ToArray(); 
     }
 
+    public bool HasExtendedProperty(string name) {
+      return namevalmap.ContainsKey(name);
+    }
+
     public object GetValue(string name) { 
       return base_obj_keys.ContainsKey(name) ? 
           Helpers.GetValue(BaseObjectObj, name) : 
           namevalmap[name].Item2;
+    }
+
+    public void SetValue(string name, object value) { 
+      if (base_obj_keys.ContainsKey(name)) Helpers.SetValue(BaseObjectObj, name, value);
+      else namevalmap[name] = Tuple.Create(namevalmap[name].Item1, value);
     }
 
     public void AddProperty(string name, EAttributeType type, object value) {
@@ -44,7 +53,7 @@ namespace PicNetML
     }
   }
 
-  [Serializable] public class ExtendableObj<T> : ExtendableObjBase, IExtendableObj<T> where T : new() {            
+  [Serializable] public class ExtendableObj<T> : ExtendableObjBase, ICloneable, IExtendableObj<T> where T : new() {            
     public ExtendableObj() { throw new ApplicationException("Create ExtendableObj using ExtendableObj.Create."); }
 
     internal ExtendableObj(T t) { 
@@ -79,12 +88,13 @@ namespace PicNetML
       return this;
     }    
 
-    public object Clone() { 
-      var cloned = new ExtendableObj<T> {
-        Properties = Properties.ToArray(), 
-        BaseObject = (T) (BaseObject is ICloneable ? 
-            ((ICloneable) BaseObject).Clone() : BaseObject)
-      };
+    public object Clone() {
+      Console.WriteLine("HERE");
+      var props = Properties.ToArray();
+      var baseo = BaseObject is ICloneable ? 
+            ((ICloneable) BaseObject).Clone() : BaseObject;
+      var cloned = new ExtendableObj<T>((T) baseo);
+      props.ForEach2(p => cloned.AddProperty(p.Name, p.Type, p.Value));      
       return cloned;
     }
 

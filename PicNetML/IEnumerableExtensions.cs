@@ -17,12 +17,23 @@ namespace PicNetML
       return data.OrderBy(d => Runtime.Random).ToList();
     }
 
-    public static IEnumerable<T> RandomSample<T>(this IEnumerable<T> data, int size, int seed = 0)
+    public static IEnumerable<T> RandomSample<T>(this IEnumerable<T> data, int size) {
+      return RandomSampleImpl(data, size, false);
+    }
+
+    public static IEnumerable<T> RandomSampleWithReplacement<T>(this IEnumerable<T> data, int size) {
+      return RandomSampleImpl(data, size, true);
+    }
+
+    private static IEnumerable<T> RandomSampleImpl<T>(this IEnumerable<T> data, int size, bool wreplacement)
     {
       var lst = data.ToList();
-      if (size <= 0 || size > lst.Count) throw new ArgumentException("size");
-      if (size == lst.Count) return lst;
-      var odds = size / (double) lst.Count;
+      var lcount = lst.Count;
+      if (size <= 0) throw new ArgumentException("size");
+      if (!wreplacement && size > lcount) throw new ArgumentException("size");
+      if (!wreplacement && size == lcount) return lst.Randomize();
+
+      var odds = Math.Min(0.5, size / (double) lcount);
       var sample = new List<T>();
       var source = lst.ToList();
       var idx = 0;
@@ -33,7 +44,7 @@ namespace PicNetML
           var modded = idx % source.Count;
           var val = source[modded];
           sample.Add(val);
-          source.RemoveAt(modded);
+          if (!wreplacement) source.RemoveAt(modded);
           if (sample.Count == size) return sample;
         }
         idx++;
@@ -58,11 +69,12 @@ namespace PicNetML
       foreach (var e in source) { action(e, idx++); }
     }
 
-    public static IEnumerable<T> ToEnumerable<T>(this Enumeration source) 
+    public static IEnumerable<T> ToEnumerable<T>(this Collection source) 
     {
       var lst = new List<T>();
-      while (source.hasMoreElements()) {
-        lst.Add((T) source.nextElement());
+      var iter = source.iterator();
+      while (iter.hasNext()) {
+        lst.Add((T) iter.next());
       }
       return lst;
     }

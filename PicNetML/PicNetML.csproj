@@ -135,6 +135,7 @@
     <Compile Include="Clstr\IUntypedBaseClusterer.cs" />
     <Compile Include="Clstr\UntypedBaseClusterer.cs" />
     <Compile Include="CombinationRuntimeBuilder.cs" />
+    <Compile Include="Runtime_Construction_Typed.cs" />
     <Compile Include="Fltr\Generated\MergeInfrequentNominalValues.cs" />
     <Compile Include="Fltr\Generated\MergeNominalValues.cs" />
     <Compile Include="Fltr\Generated\RenameNominalValues.cs" />
@@ -142,7 +143,7 @@
     <Compile Include="Runtime_Custom_Filtering.cs" />
     <Compile Include="Runtime_File_IO.cs" />
     <Compile Include="Runtime_Classifiers_and_Filters.cs" />
-    <Compile Include="Runtime_Construction.cs" />
+    <Compile Include="Runtime_Construction_Untyped.cs" />
     <Compile Include="ExtendableObj.cs" />
     <Compile Include="Generated\PmlAttribute.cs" />
     <Compile Include="Generated\PmlEvaluation.cs" />

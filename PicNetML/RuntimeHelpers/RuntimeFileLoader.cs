@@ -9,45 +9,42 @@ using weka.core.converters;
 namespace PicNetML.RuntimeHelpers
 {
   internal class RuntimeFileLoader {
-    private readonly int classifier;
     private readonly string file;
-    private readonly int trainingsize;
     private readonly Func<string, string> preprocessor;
 
-    public RuntimeFileLoader(int classifier, string file, int trainingsize, Func<string, string> preprocessor) {
+    public RuntimeFileLoader(string file, Func<string, string> preprocessor) {
       if (System.String.IsNullOrWhiteSpace(file)) { throw new ArgumentNullException("file"); }
 
-      this.classifier = classifier;
       this.file = file;
-      this.trainingsize = trainingsize;
       this.preprocessor = preprocessor;
     }
 
-    internal Instances Load<T>() where T : new () {      
+    internal Instances Load<T>(int classidx) where T : new () {      
       var instances = file.EndsWith(".arff") ? 
-          LoadRuntimFromArffFile() :
+          LoadRuntimFromArffFile(classidx) :
           file.EndsWith(".xrff") || file.EndsWith(".xrff.gz") ? 
-            LoadRuntimFromXrffFile() :
-            LoadRuntimeFromNonArffFile<T>();
+            LoadRuntimFromXrffFile(classidx) :
+            LoadRuntimeFromNonArffFile<T>(classidx);
       
       if (instances.numInstances() <= 0) { throw new IllegalStateException("Could not load any instances from the file provided"); }
       return instances;
     }
 
-    private Instances LoadRuntimFromXrffFile() { return LoadRuntimFromInternalFile(new XRFFLoader()); }
-    private Instances LoadRuntimFromArffFile() { return LoadRuntimFromInternalFile(new ArffLoader()); }
-    private Instances LoadRuntimFromInternalFile(AbstractFileLoader loader) { 
+    private Instances LoadRuntimFromXrffFile(int classidx) { return LoadRuntimFromInternalFile(new XRFFLoader(), classidx); }
+    private Instances LoadRuntimFromArffFile(int classidx) { return LoadRuntimFromInternalFile(new ArffLoader(), classidx); }
+    private Instances LoadRuntimFromInternalFile(AbstractFileLoader loader, int classidx) { 
+      if (preprocessor != null) throw new ApplicationException ("RuntimeFileLoader.preprocessor can only be used when loading non arff/xrff files.");
       loader.setFile(new java.io.File(file));
 
       var instances = loader.getDataSet();
-      instances.setClassIndex(classifier);
+      instances.setClassIndex(classidx);
       return instances;
     }
 
-    private Instances LoadRuntimeFromNonArffFile<T>() where T : new () {
+    private Instances LoadRuntimeFromNonArffFile<T>(int classidx) where T : new () {
       var rows = LoadRows<T>();
-      var instances = new InstancesBuilder<T>(rows, classifier, trainingsize).Build();
-      instances.setClassIndex(classifier);
+      var instances = new InstancesBuilder<T>(rows, classidx).Build();
+      instances.setClassIndex(classidx);
       return instances;        
     }
 
