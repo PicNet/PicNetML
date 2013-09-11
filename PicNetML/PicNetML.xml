@@ -415,12 +415,6 @@
             Normalize input data.
             </summary>    
         </member>
-        <member name="T:PicNetML.Clss.DelegatingClassifier`1">
-            <summary>
-            Delegates classification to an instance of any weka Classifier.
-            </summary>
-            <typeparam name="T">The classifier to delegate classification to.</typeparam>
-        </member>
         <member name="P:PicNetML.Clss.ClassifiersBayes.BayesNet">
             <summary>
             Bayes Network learning using various search algorithms and quality
@@ -662,20 +656,24 @@
         <member name="P:PicNetML.Clss.ClassifiersFunctions.SGD">
             <summary>
             Implements stochastic gradient descent for learning various linear models
-            (binary class SVM, binary class logistic regression and linear
-            regression). Globally replaces all missing values and transforms nominal attributes
-            into binary ones. It also normalizes all attributes, so the coefficients in
-            the output are based on the normalized data.<br/>For numeric class
-            attributes, the squared loss function (2) must be
-            used.<br/><br/>Options:<br/><br/>-F = 	Set the loss function to minimize. 0 = hinge loss (SVM), 1 = log loss
-            (logistic regression),<br/>	2 = squared loss (regression).<br/>	(default =
-            0)<br/>-L = 	The learning rate. If normalization is<br/>	turned off (as it
-            is automatically for streaming data), then the<br/>	default learning rate
-            will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
-            &lt;double&gt; = 	The lambda regularization constant (default = 0.0001)<br/>-E
-            &lt;integer&gt; = 	The number of epochs to perform (batch learning only,
-            default = 500)<br/>-N = 	Don't normalize the data<br/>-M = 	Don't replace missing
-            values
+            (binary class SVM, binary class logistic regression, squared loss, Huber
+            loss and epsilon-insensitive loss linear regression). Globally replaces all
+            missing values and transforms nominal attributes into binary ones. It also
+            normalizes all attributes, so the coefficients in the output are based on
+            the normalized data.<br/>For numeric class attributes, the squared, Huber or
+            epsilon-insensitve loss function must be used. Epsilon-insensitive and
+            Huber loss may require a much higher learning
+            rate.<br/><br/>Options:<br/><br/>-F = 	Set the loss function to minimize.<br/>	0 = hinge loss (SVM), 1 =
+            log loss (logistic regression),<br/>	2 = squared loss (regression), 3 =
+            epsilon insensitive loss (regression),<br/>	4 = Huber loss
+            (regression).<br/>	(default = 0)<br/>-L = 	The learning rate. If normalization is<br/>	turned
+            off (as it is automatically for streaming data), then the<br/>	default
+            learning rate will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
+            &lt;double&gt; = 	The lambda regularization constant (default =
+            0.0001)<br/>-E &lt;integer&gt; = 	The number of epochs to perform (batch learning
+            only, default = 500)<br/>-C &lt;double&gt; = 	The epsilon threshold
+            (epsilon-insenstive and Huber loss only, default = 1e-3)<br/>-N = 	Don't normalize
+            the data<br/>-M = 	Don't replace missing values
             </summary>
         </member>
         <member name="P:PicNetML.Clss.ClassifiersFunctions.SGDText">
@@ -1125,15 +1123,17 @@
             and<br/>	may output additional info to the console<br/>-W = 	Full name of
             base classifier.<br/>	(default:
             weka.classifiers.functions.Logistic)<br/><br/>Options specific to classifier weka.classifiers.functions.SGD: = <br/>-F
-            = 	Set the loss function to minimize. 0 = hinge loss (SVM), 1 = log loss
-            (logistic regression),<br/>	2 = squared loss (regression).<br/>	(default =
-            0)<br/>-L = 	The learning rate. If normalization is<br/>	turned off (as it is
-            automatically for streaming data), then the<br/>	default learning rate
-            will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
+            = 	Set the loss function to minimize.<br/>	0 = hinge loss (SVM), 1 = log
+            loss (logistic regression),<br/>	2 = squared loss (regression), 3 = epsilon
+            insensitive loss (regression),<br/>	4 = Huber loss
+            (regression).<br/>	(default = 0)<br/>-L = 	The learning rate. If normalization is<br/>	turned off
+            (as it is automatically for streaming data), then the<br/>	default learning
+            rate will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
             &lt;double&gt; = 	The lambda regularization constant (default = 0.0001)<br/>-E
-            &lt;integer&gt; = 	The number of epochs to perform (batch learning only, default
-            = 500)<br/>-N = 	Don't normalize the data<br/>-M = 	Don't replace missing
-            values
+            &lt;integer&gt; = 	The number of epochs to perform (batch learning only,
+            default = 500)<br/>-C &lt;double&gt; = 	The epsilon threshold
+            (epsilon-insenstive and Huber loss only, default = 1e-3)<br/>-N = 	Don't normalize the
+            data<br/>-M = 	Don't replace missing values
             </summary>
         </member>
         <member name="P:PicNetML.Clss.ClassifiersMeta.MultiScheme">
@@ -1429,6 +1429,37 @@
             and<br/>	may output additional info to the console
             </summary>
         </member>
+        <member name="P:PicNetML.Clss.ClassifiersTrees.HoeffdingTree">
+            <summary>
+            A Hoeffding tree (VFDT) is an incremental, anytime decision tree
+            induction algorithm that is capable of learning from massive data streams, assuming
+            that the distribution generating examples does not change over time.
+            Hoeffding trees exploit the fact that a small sample can often be enough to
+            choose an optimal splitting attribute. This idea is supported mathematically by
+            the Hoeffding bound, which quantifies the number of observations (in our
+            case, examples) needed to estimate some statistics within a prescribed
+            precision (in our case, the goodness of an attribute).<br/><br/>A theoretically
+            appealing feature of Hoeffding Trees not shared by otherincremental
+            decision tree learners is that it has sound guarantees of performance. Using the
+            Hoeffding bound one can show that its output is asymptotically nearly
+            identical to that of a non-incremental learner using infinitely many examples.
+            For more information see: <br/><br/>Geoff Hulten, Laurie Spencer, Pedro
+            Domingos: Mining time-changing data streams. In: ACM SIGKDD Intl. Conf. on
+            Knowledge Discovery and Data Mining, 97-106, 2001.<br/><br/>Options:<br/><br/>-L
+            = 	The leaf prediction strategy to use. 0 = majority class, 1 = naive
+            Bayes, 2 = naive Bayes adaptive.<br/>	(default = 2)<br/>-S = 	The splitting
+            criterion to use. 0 = Gini, 1 = Info gain<br/>	(default = 1)<br/>-E = 	The
+            allowable error in a split decision - values closer to zero will take longer
+            to decide<br/>	(default = 1e-7)<br/>-H = 	Threshold below which a split will
+            be forced to break ties<br/>	(default = 0.05)<br/>-M = 	Minimum fraction
+            of weight required down at least two branches for info gain
+            splitting<br/>	(default = 0.01)<br/>-G = 	Grace period - the number of instances a leaf
+            should observe between split attempts<br/>	(default = 200)<br/>-N = 	The
+            number of instances (weight) a leaf should observe before allowing naive Bayes
+            to make predictions (NB or NB adaptive only)<br/>	(default = 0)<br/>-P =
+            	Print leaf models when using naive Bayes at the leaves.
+            </summary>
+        </member>
         <member name="P:PicNetML.Clss.ClassifiersTrees.J48">
             <summary>
             Class for generating a pruned or unpruned C4.5 decision tree. For more
@@ -1509,6 +1540,76 @@
             No class description found.
             </summary>
         </member>
+        <member name="T:PicNetML.Clss.HoeffdingTree">
+            <summary>
+            A Hoeffding tree (VFDT) is an incremental, anytime decision tree
+            induction algorithm that is capable of learning from massive data streams, assuming
+            that the distribution generating examples does not change over time.
+            Hoeffding trees exploit the fact that a small sample can often be enough to
+            choose an optimal splitting attribute. This idea is supported mathematically by
+            the Hoeffding bound, which quantifies the number of observations (in our
+            case, examples) needed to estimate some statistics within a prescribed
+            precision (in our case, the goodness of an attribute).<br/><br/>A theoretically
+            appealing feature of Hoeffding Trees not shared by otherincremental
+            decision tree learners is that it has sound guarantees of performance. Using the
+            Hoeffding bound one can show that its output is asymptotically nearly
+            identical to that of a non-incremental learner using infinitely many examples.
+            For more information see: <br/><br/>Geoff Hulten, Laurie Spencer, Pedro
+            Domingos: Mining time-changing data streams. In: ACM SIGKDD Intl. Conf. on
+            Knowledge Discovery and Data Mining, 97-106, 2001.<br/><br/>Options:<br/><br/>-L
+            = 	The leaf prediction strategy to use. 0 = majority class, 1 = naive
+            Bayes, 2 = naive Bayes adaptive.<br/>	(default = 2)<br/>-S = 	The splitting
+            criterion to use. 0 = Gini, 1 = Info gain<br/>	(default = 1)<br/>-E = 	The
+            allowable error in a split decision - values closer to zero will take longer
+            to decide<br/>	(default = 1e-7)<br/>-H = 	Threshold below which a split will
+            be forced to break ties<br/>	(default = 0.05)<br/>-M = 	Minimum fraction
+            of weight required down at least two branches for info gain
+            splitting<br/>	(default = 0.01)<br/>-G = 	Grace period - the number of instances a leaf
+            should observe between split attempts<br/>	(default = 200)<br/>-N = 	The
+            number of instances (weight) a leaf should observe before allowing naive Bayes
+            to make predictions (NB or NB adaptive only)<br/>	(default = 0)<br/>-P =
+            	Print leaf models when using naive Bayes at the leaves.
+            </summary>
+        </member>
+        <member name="M:PicNetML.Clss.HoeffdingTree.SplitConfidence(System.Double)">
+            <summary>
+            The allowable error in a split decision. Values closer to zero will take
+            longer to decide.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.HoeffdingTree.HoeffdingTieThreshold(System.Double)">
+            <summary>
+            Theshold below which a split will be forced to break ties.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.HoeffdingTree.MinimumFractionOfWeightInfoGain(System.Double)">
+            <summary>
+            Minimum fraction of weight required down at least two branches for info
+            gain splitting.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.HoeffdingTree.GracePeriod(System.Double)">
+            <summary>
+            Number of instances (or total weight of instances) a leaf should observe
+            between split attempts.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.HoeffdingTree.NaiveBayesPredictionThreshold(System.Double)">
+            <summary>
+            The number of instances (weight) a leaf should observe before allowing
+            naive Bayes (adaptive) to make predictions
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.HoeffdingTree.PrintLeafModels(System.Boolean)">
+            <summary>
+            Print leaf models (naive bayes leaves only)
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.HoeffdingTree.Debug(System.Boolean)">
+            <summary>
+            If set to true, classifier may output additional info to the console.
+            </summary>    
+        </member>
         <!-- Badly formed XML comment ignored for member "T:PicNetML.Clss.LibLINEAR" -->
         <member name="M:PicNetML.Clss.LibLINEAR.SVMType(PicNetML.Clss.LibLINEAR.ESVMType)">
             <summary>
@@ -1554,6 +1655,36 @@
             </summary>    
         </member>
         <member name="M:PicNetML.Clss.LibLINEAR.Debug(System.Boolean)">
+            <summary>
+            If set to true, classifier may output additional info to the console.
+            </summary>    
+        </member>
+        <member name="T:PicNetML.Clss.LogisticBase">
+            <summary>
+            No class description found.
+            </summary>
+        </member>
+        <member name="M:PicNetML.Clss.LogisticBase.MaxIterations(System.Int32)">
+            <summary>
+            
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.LogisticBase.HeuristicStop(System.Int32)">
+            <summary>
+            
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.LogisticBase.WeightTrimBeta(System.Double)">
+            <summary>
+            
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.LogisticBase.UseAIC(System.Boolean)">
+            <summary>
+            
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.LogisticBase.Debug(System.Boolean)">
             <summary>
             If set to true, classifier may output additional info to the console.
             </summary>    
@@ -1625,6 +1756,137 @@
             <summary>
             This is used to create a new Runtime with a specified set of Instances.
             </summary>
+        </member>
+        <member name="T:PicNetML.Fltr.MergeInfrequentNominalValues">
+            <summary>
+            Merges all values of the specified nominal attribute that are
+            sufficiently infrequent.<br/><br/>Options:<br/><br/>-D = 	Turns on output of debugging
+            information.<br/>-N &lt;int&gt; = 	The minimum frequency for a value to
+            remain (default: 2).<br/><br/>-R &lt;range&gt; = 	Sets list of attributes to
+            act on (or its inverse). 'first and 'last' are accepted as
+            well.'<br/>	E.g.: first-5,7,9,20-last<br/>	(default: 1,2)<br/>-V = 	Invert matching sense
+            (i.e. act on all attributes not specified in list)
+            </summary>
+        </member>
+        <member name="M:PicNetML.Fltr.MergeInfrequentNominalValues.MinimumFrequency(System.Int32)">
+            <summary>
+            The minimum frequency for a value to remain.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeInfrequentNominalValues.AttributeIndices(System.String)">
+            <summary>
+            Specify range of attributes to act on (or its inverse). This is a comma
+            separated list of attribute indices, with "first" and "last" valid values.
+            Specify an inclusive range with "-". E.g: "first-3,5,6-10,last".
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeInfrequentNominalValues.InvertSelection(System.Boolean)">
+            <summary>
+            Determines whether selected attributes are to be acted on or all other
+            attributes are used instead.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeInfrequentNominalValues.AttributeIndicesArray(System.Int32[])">
+            <summary>
+            
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeInfrequentNominalValues.Debug(System.Boolean)">
+            <summary>
+            Turns on output of debugging information.
+            </summary>    
+        </member>
+        <member name="T:PicNetML.Fltr.MergeNominalValues">
+            <summary>
+            Merges values of all nominal attributes among the specified attributes,
+            excluding the class attribute, using the CHAID method, but without
+            considering to re-split merged subsets. It implements Steps 1 and 2 described by
+            Kass (1980), see<br/><br/>Gordon V. Kass (1980). An Exploratory Technique for
+            Investigating Large Quantities of Categorical Data. Applied Statistics.
+            29(2):119-127.<br/><br/>Once attribute values have been merged, a chi-squared
+            test using the Bonferroni correction is applied to check if the resulting
+            attribute is a valid predictor, based on the Bonferroni multiplier in
+            Equation 3.2 in Kass (1980). If an attribute does not pass this test, all
+            remaining values (if any) are merged. Nevertheless, useless predictors can slip
+            through without being fully merged, e.g. identifier attributes.<br/><br/>The
+            code applies the Yates correction when the chi-squared statistic is
+            computed.<br/><br/>Note that the algorithm is quadratic in the number of attribute
+            values for an attribute.<br/><br/>Options:<br/><br/>-D = 	Turns on output
+            of debugging information.<br/>-L &lt;double&gt; = 	The significance level
+            (default: 0.05).<br/><br/>-R &lt;range&gt; = 	Sets list of attributes to act
+            on (or its inverse). 'first and 'last' are accepted as well.'<br/>	E.g.:
+            first-5,7,9,20-last<br/>	(default: first-last)<br/>-V = 	Invert matching
+            sense (i.e. act on all attributes not specified in list)<br/>-O = 	Use short
+            identifiers for merged subsets.
+            </summary>
+        </member>
+        <member name="M:PicNetML.Fltr.MergeNominalValues.SignificanceLevel(System.Double)">
+            <summary>
+            The significance level for the chi-squared test used to decide when to
+            stop merging.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeNominalValues.AttributeIndices(System.String)">
+            <summary>
+            Specify range of attributes to act on (or its inverse). This is a comma
+            separated list of attribute indices, with "first" and "last" valid values.
+            Specify an inclusive range with "-". E.g: "first-3,5,6-10,last".
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeNominalValues.InvertSelection(System.Boolean)">
+            <summary>
+            Determines whether selected attributes are to be acted on or all other
+            attributes are used instead.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeNominalValues.UseShortIdentifiers(System.Boolean)">
+            <summary>
+            Whether to use short identifiers for the merged values.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeNominalValues.AttributeIndicesArray(System.Int32[])">
+            <summary>
+            
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.MergeNominalValues.Debug(System.Boolean)">
+            <summary>
+            Turns on output of debugging information.
+            </summary>    
+        </member>
+        <member name="T:PicNetML.Fltr.RenameNominalValues">
+            <summary>
+            Renames the values of nominal attributes.<br/><br/>Options:<br/><br/>-R =
+            	Attributes to act on. Can be either a range<br/>	string (e.g. 1,2,6-10)
+            OR a comma-separated list of named attributes<br/>	(default none)<br/>-V =
+            	Invert matching sense (i.e. act on all attributes other than those
+            specified)<br/>-N = 	Nominal labels and their replacement values.<br/>	E.g.
+            red:blue, black:white, fred:bob<br/>-I = 	Ignore case when matching nominal values
+            </summary>
+        </member>
+        <member name="M:PicNetML.Fltr.RenameNominalValues.SelectedAttributes(System.String)">
+            <summary>
+            The attributes (index range string or explicit comma-separated attribute
+            names) to work on
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.RenameNominalValues.ValueReplacements(System.String)">
+            <summary>
+            A comma separated list of values to replace and their replacements. E.g.
+            red:green, blue:purple, fred:bob
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.RenameNominalValues.InvertSelection(System.Boolean)">
+            <summary>
+            Determines whether to apply the operation to the specified. attributes,
+            or all attributes but the specified ones. If set to true, all attributes but
+            the speficied ones will be affected.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Fltr.RenameNominalValues.IgnoreCase(System.Boolean)">
+            <summary>
+            Whether to ignore case when matching nominal values
+            </summary>    
         </member>
         <member name="M:PicNetML.PmlAttribute.#ctor(weka.core.Attribute)">
             <summary>
@@ -1718,14 +1980,20 @@
             evaluator.<br/>	eg. -E "weka.attributeSelection.CfsSubsetEval -L"<br/><br/>Options
             specific to evaluator weka.attributeSelection.CfsSubsetEval: = <br/>-M = 	Treat
             missing values as a separate value.<br/>-L = 	Don't include locally
-            predictive attributes.<br/><br/>Options specific to search
-            weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; = 	Specify a starting set of
-            attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward | 1 = forward | 2 =
-            bi-directional&gt; = 	Direction of search. (default = 1).<br/>-N &lt;num&gt; =
-            	Number of non-improving nodes to<br/>	consider before terminating
-            search.<br/>-S &lt;num&gt; = 	Size of lookup cache for evaluated
-            subsets.<br/>	Expressed as a multiple of the number of<br/>	attributes in the data set. (default
-            = 1)
+            predictive attributes.<br/>-Z = 	Precompute the full correlation matrix at the
+            outset, rather than compute correlations lazily (as needed) during the search.
+            Use this in conjuction with parallel processing in order to speed up a
+            backward search.<br/>-P &lt;int&gt; = 	The size of the thread pool, for
+            example, the number of cores in the CPU. (default 1)<br/><br/>-E &lt;int&gt; =
+            	The number of threads to use, which should be >= size of thread pool.
+            (default 1)<br/><br/>-D = 	Output debugging info.<br/><br/>Options specific to
+            search weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; =
+            	Specify a starting set of attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward
+            | 1 = forward | 2 = bi-directional&gt; = 	Direction of search. (default =
+            1).<br/>-N &lt;num&gt; = 	Number of non-improving nodes to<br/>	consider
+            before terminating search.<br/>-S &lt;num&gt; = 	Size of lookup cache for
+            evaluated subsets.<br/>	Expressed as a multiple of the number
+            of<br/>	attributes in the data set. (default = 1)
             </summary>
         </member>
         <member name="P:PicNetML.Fltr.FiltersSupervisedAttribute.ClassOrder">
@@ -1744,6 +2012,30 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:PicNetML.Fltr.FiltersSupervisedAttribute.Discretize" -->
+        <member name="P:PicNetML.Fltr.FiltersSupervisedAttribute.MergeNominalValues">
+            <summary>
+            Merges values of all nominal attributes among the specified attributes,
+            excluding the class attribute, using the CHAID method, but without
+            considering to re-split merged subsets. It implements Steps 1 and 2 described by
+            Kass (1980), see<br/><br/>Gordon V. Kass (1980). An Exploratory Technique for
+            Investigating Large Quantities of Categorical Data. Applied Statistics.
+            29(2):119-127.<br/><br/>Once attribute values have been merged, a chi-squared
+            test using the Bonferroni correction is applied to check if the resulting
+            attribute is a valid predictor, based on the Bonferroni multiplier in
+            Equation 3.2 in Kass (1980). If an attribute does not pass this test, all
+            remaining values (if any) are merged. Nevertheless, useless predictors can slip
+            through without being fully merged, e.g. identifier attributes.<br/><br/>The
+            code applies the Yates correction when the chi-squared statistic is
+            computed.<br/><br/>Note that the algorithm is quadratic in the number of attribute
+            values for an attribute.<br/><br/>Options:<br/><br/>-D = 	Turns on output
+            of debugging information.<br/>-L &lt;double&gt; = 	The significance level
+            (default: 0.05).<br/><br/>-R &lt;range&gt; = 	Sets list of attributes to act
+            on (or its inverse). 'first and 'last' are accepted as well.'<br/>	E.g.:
+            first-5,7,9,20-last<br/>	(default: first-last)<br/>-V = 	Invert matching
+            sense (i.e. act on all attributes not specified in list)<br/>-O = 	Use short
+            identifiers for merged subsets.
+            </summary>
+        </member>
         <member name="P:PicNetML.Fltr.FiltersSupervisedAttribute.NominalToBinary">
             <summary>
             Converts all nominal attributes into binary numeric attributes. An
@@ -1758,6 +2050,16 @@
             Inc.<br/><br/>Options:<br/><br/>-N = 	Sets if binary attributes are to be coded as nominal
             ones.<br/>-A = 	For each nominal value a new attribute is created, <br/>	not
             only if there are more than 2 values.
+            </summary>
+        </member>
+        <member name="P:PicNetML.Fltr.FiltersSupervisedAttribute.PartitionMembership">
+            <summary>
+            A filter that uses a PartitionGenerator to generate partition membership
+            values; filtered instances are composed of these values plus the class
+            attribute (if set in the input data) and rendered as sparse
+            instances.<br/><br/>Options:<br/><br/>-W &lt;name of partition generator&gt; = 	Full name of
+            partition generator to use,
+            e.g.:<br/>		weka.classifiers.trees.J48<br/>	Additional options after the '--'.<br/>	(default: weka.classifiers.trees.J48)
             </summary>
         </member>
         <member name="P:PicNetML.Fltr.FiltersSupervisedInstance.Resample">
@@ -2072,6 +2374,17 @@
             modify specified columns)
             </summary>
         </member>
+        <member name="P:PicNetML.Fltr.FiltersUnsupervisedAttribute.MergeInfrequentNominalValues">
+            <summary>
+            Merges all values of the specified nominal attribute that are
+            sufficiently infrequent.<br/><br/>Options:<br/><br/>-D = 	Turns on output of debugging
+            information.<br/>-N &lt;int&gt; = 	The minimum frequency for a value to
+            remain (default: 2).<br/><br/>-R &lt;range&gt; = 	Sets list of attributes to
+            act on (or its inverse). 'first and 'last' are accepted as
+            well.'<br/>	E.g.: first-5,7,9,20-last<br/>	(default: 1,2)<br/>-V = 	Invert matching sense
+            (i.e. act on all attributes not specified in list)
+            </summary>
+        </member>
         <member name="P:PicNetML.Fltr.FiltersUnsupervisedAttribute.MergeManyValues">
             <summary>
             Merges many values of a nominal attribute into one
@@ -2204,16 +2517,6 @@
             discretized attributes.
             </summary>
         </member>
-        <member name="P:PicNetML.Fltr.FiltersUnsupervisedAttribute.PartitionMembership">
-            <summary>
-            A filter that uses a PartitionGenerator to generate partition membership
-            values; filtered instances are composed of these values plus the class
-            attribute (if set in the input data) and rendered as sparse
-            instances.<br/><br/>Options:<br/><br/>-W &lt;name of partition generator&gt; = 	Full name of
-            partition generator to use,
-            e.g.:<br/>		weka.classifiers.trees.J48<br/>	Additional options after the '--'.<br/>	(default: weka.classifiers.trees.J48)
-            </summary>
-        </member>
         <member name="P:PicNetML.Fltr.FiltersUnsupervisedAttribute.PartitionedMultiFilter">
             <summary>
             A filter that applies filters on subsets of attributes and assembles the
@@ -2310,6 +2613,16 @@
             </summary>
         </member>
         <!-- Badly formed XML comment ignored for member "P:PicNetML.Fltr.FiltersUnsupervisedAttribute.RenameAttribute" -->
+        <member name="P:PicNetML.Fltr.FiltersUnsupervisedAttribute.RenameNominalValues">
+            <summary>
+            Renames the values of nominal attributes.<br/><br/>Options:<br/><br/>-R =
+            	Attributes to act on. Can be either a range<br/>	string (e.g. 1,2,6-10)
+            OR a comma-separated list of named attributes<br/>	(default none)<br/>-V =
+            	Invert matching sense (i.e. act on all attributes other than those
+            specified)<br/>-N = 	Nominal labels and their replacement values.<br/>	E.g.
+            red:blue, black:white, fred:bob<br/>-I = 	Ignore case when matching nominal values
+            </summary>
+        </member>
         <member name="P:PicNetML.Fltr.FiltersUnsupervisedAttribute.Reorder">
             <summary>
             A filter that generates output with a new order of the attributes. Useful
@@ -2598,7 +2911,9 @@
             ranked list of attributes.<br/>-T &lt;threshold&gt; = 	Specify a theshold by
             which attributes<br/>	may be discarded from the ranking.<br/>	Use in
             conjuction with -R<br/>-N &lt;num to select&gt; = 	Specify number of attributes to
-            select
+            select<br/>-num-slots &lt;int&gt; = 	The number of execution slots, for
+            example, the number of cores in the CPU. (default 1)<br/><br/>-D = 	Print
+            debugging output
             </summary>
         </member>
         <member name="P:PicNetML.AttrSel.Algs.Algorithms.Ranker">
@@ -2667,7 +2982,9 @@
             ranked list of attributes.<br/>-T &lt;threshold&gt; = 	Specify a theshold by
             which attributes<br/>	may be discarded from the ranking.<br/>	Use in
             conjuction with -R<br/>-N &lt;num to select&gt; = 	Specify number of attributes to
-            select
+            select<br/>-num-slots &lt;int&gt; = 	The number of execution slots, for
+            example, the number of cores in the CPU. (default 1)<br/><br/>-D = 	Print
+            debugging output
             </summary>
         </member>
         <member name="M:PicNetML.AttrSel.Algs.GreedyStepwise.GenerateRanking(System.Boolean)">
@@ -2704,6 +3021,17 @@
             Specify the number of attributes to retain. The default value (-1)
             indicates that all attributes are to be retained. Use either this option or a
             threshold to reduce the attribute set.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.AttrSel.Algs.GreedyStepwise.NumExecutionSlots(System.Int32)">
+            <summary>
+            The number of execution slots, for example, the number of cores in the
+            CPU.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.AttrSel.Algs.GreedyStepwise.DebuggingOutput(System.Boolean)">
+            <summary>
+            Output debugging information to the console
             </summary>    
         </member>
         <member name="T:PicNetML.AttrSel.Algs.Ranker">
@@ -2754,7 +3082,14 @@
             preferred.<br/><br/>For more information see:<br/><br/>M. A. Hall (1998).
             Correlation-based Feature Subset Selection for Machine Learning. Hamilton, New
             Zealand.<br/><br/>Options:<br/><br/>-M = 	Treat missing values as a
-            separate value.<br/>-L = 	Don't include locally predictive attributes.
+            separate value.<br/>-L = 	Don't include locally predictive attributes.<br/>-Z =
+            	Precompute the full correlation matrix at the outset, rather than compute
+            correlations lazily (as needed) during the search. Use this in conjuction
+            with parallel processing in order to speed up a backward search.<br/>-P
+            &lt;int&gt; = 	The size of the thread pool, for example, the number of cores in
+            the CPU. (default 1)<br/><br/>-E &lt;int&gt; = 	The number of threads to
+            use, which should be >= size of thread pool. (default 1)<br/><br/>-D = 	Output
+            debugging info.
             </summary>
         </member>
         <member name="M:PicNetML.AttrSel.Evals.CfsSubset.MissingSeparate(System.Boolean)">
@@ -2771,6 +3106,28 @@
             question
             </summary>    
         </member>
+        <member name="M:PicNetML.AttrSel.Evals.CfsSubset.PreComputeCorrelationMatrix(System.Boolean)">
+            <summary>
+            Precompute the full correlation matrix at the outset, rather than compute
+            correlations lazily (as needed) during the search. Use this in conjuction
+            with parallel processing in order to speed up a backward search.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.AttrSel.Evals.CfsSubset.PoolSize(System.Int32)">
+            <summary>
+            The size of the thread pool, for example, the number of cores in the CPU.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.AttrSel.Evals.CfsSubset.NumThreads(System.Int32)">
+            <summary>
+            The number of threads to use, which should be >= size of thread pool.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.AttrSel.Evals.CfsSubset.Debug(System.Boolean)">
+            <summary>
+            Output debugging info
+            </summary>    
+        </member>
         <member name="P:PicNetML.AttrSel.Evals.Evaluators.CfsSubset">
             <summary>
             CfsSubsetEval :<br/><br/>Evaluates the worth of a subset of attributes by
@@ -2780,7 +3137,14 @@
             preferred.<br/><br/>For more information see:<br/><br/>M. A. Hall (1998).
             Correlation-based Feature Subset Selection for Machine Learning. Hamilton, New
             Zealand.<br/><br/>Options:<br/><br/>-M = 	Treat missing values as a
-            separate value.<br/>-L = 	Don't include locally predictive attributes.
+            separate value.<br/>-L = 	Don't include locally predictive attributes.<br/>-Z =
+            	Precompute the full correlation matrix at the outset, rather than compute
+            correlations lazily (as needed) during the search. Use this in conjuction
+            with parallel processing in order to speed up a backward search.<br/>-P
+            &lt;int&gt; = 	The size of the thread pool, for example, the number of cores in
+            the CPU. (default 1)<br/><br/>-E &lt;int&gt; = 	The number of threads to
+            use, which should be >= size of thread pool. (default 1)<br/><br/>-D = 	Output
+            debugging info.
             </summary>
         </member>
         <member name="P:PicNetML.AttrSel.Evals.Evaluators.CorrelationAttribute">
@@ -2890,9 +3254,12 @@
             mean).<br/>	(default: 0.01 (1%))<br/>-E &lt;acc | rmse | mae | f-meas | auc |
             auprc&gt; = 	Performance evaluation measure to use for selecting
             attributes.<br/>	(Default = accuracy for discrete class and rmse for numeric
-            class)<br/><br/>Options specific to scheme weka.classifiers.rules.ZeroR: = <br/>-D =
-            	If set, classifier is run in debug mode and<br/>	may output additional
-            info to the console
+            class)<br/>-IRclass &lt;label | index&gt; = 	Optional class value (label or 1-based
+            index) to use in conjunction with<br/>	IR statistics (f-meas, auc or
+            auprc). Omitting this option will use<br/>	the class-weighted
+            average.<br/><br/>Options specific to scheme weka.classifiers.rules.ZeroR: = <br/>-D = 	If
+            set, classifier is run in debug mode and<br/>	may output additional info to
+            the console
             </summary>
         </member>
         <member name="P:PicNetML.AttrSel.Evals.Evaluators.LatentSemanticAnalysis">
@@ -3106,9 +3473,12 @@
             mean).<br/>	(default: 0.01 (1%))<br/>-E &lt;acc | rmse | mae | f-meas | auc |
             auprc&gt; = 	Performance evaluation measure to use for selecting
             attributes.<br/>	(Default = accuracy for discrete class and rmse for numeric
-            class)<br/><br/>Options specific to scheme weka.classifiers.rules.ZeroR: = <br/>-D =
-            	If set, classifier is run in debug mode and<br/>	may output additional
-            info to the console
+            class)<br/>-IRclass &lt;label | index&gt; = 	Optional class value (label or 1-based
+            index) to use in conjunction with<br/>	IR statistics (f-meas, auc or
+            auprc). Omitting this option will use<br/>	the class-weighted
+            average.<br/><br/>Options specific to scheme weka.classifiers.rules.ZeroR: = <br/>-D = 	If
+            set, classifier is run in debug mode and<br/>	may output additional info to
+            the console
             </summary>
         </member>
         <member name="M:PicNetML.AttrSel.Evals.WrapperSubset.Classifier(PicNetML.Clss.IBaseClassifier{weka.classifiers.Classifier})">
@@ -3129,6 +3499,11 @@
         <member name="M:PicNetML.AttrSel.Evals.WrapperSubset.EvaluationMeasure(PicNetML.AttrSel.Evals.WrapperSubset.EEvaluationMeasure)">
             <summary>
             The measure used to evaluate the performance of attribute combinations.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.AttrSel.Evals.WrapperSubset.IRClassValue(System.String)">
+            <summary>
+            
             </summary>    
         </member>
         <member name="T:PicNetML.Clss.AdaBoostM1">
@@ -4349,36 +4724,6 @@
             Maximum number of iterations to perform.
             </summary>    
         </member>
-        <member name="T:PicNetML.Clss.LogisticBase">
-            <summary>
-            No class description found.
-            </summary>
-        </member>
-        <member name="M:PicNetML.Clss.LogisticBase.MaxIterations(System.Int32)">
-            <summary>
-            
-            </summary>    
-        </member>
-        <member name="M:PicNetML.Clss.LogisticBase.HeuristicStop(System.Int32)">
-            <summary>
-            
-            </summary>    
-        </member>
-        <member name="M:PicNetML.Clss.LogisticBase.WeightTrimBeta(System.Double)">
-            <summary>
-            
-            </summary>    
-        </member>
-        <member name="M:PicNetML.Clss.LogisticBase.UseAIC(System.Boolean)">
-            <summary>
-            
-            </summary>    
-        </member>
-        <member name="M:PicNetML.Clss.LogisticBase.Debug(System.Boolean)">
-            <summary>
-            If set to true, classifier may output additional info to the console.
-            </summary>    
-        </member>
         <member name="T:PicNetML.Clss.LogitBoost">
             <summary>
             Class for performing additive logistic regression. <br/>This class
@@ -4647,15 +4992,17 @@
             and<br/>	may output additional info to the console<br/>-W = 	Full name of
             base classifier.<br/>	(default:
             weka.classifiers.functions.Logistic)<br/><br/>Options specific to classifier weka.classifiers.functions.SGD: = <br/>-F
-            = 	Set the loss function to minimize. 0 = hinge loss (SVM), 1 = log loss
-            (logistic regression),<br/>	2 = squared loss (regression).<br/>	(default =
-            0)<br/>-L = 	The learning rate. If normalization is<br/>	turned off (as it is
-            automatically for streaming data), then the<br/>	default learning rate
-            will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
+            = 	Set the loss function to minimize.<br/>	0 = hinge loss (SVM), 1 = log
+            loss (logistic regression),<br/>	2 = squared loss (regression), 3 = epsilon
+            insensitive loss (regression),<br/>	4 = Huber loss
+            (regression).<br/>	(default = 0)<br/>-L = 	The learning rate. If normalization is<br/>	turned off
+            (as it is automatically for streaming data), then the<br/>	default learning
+            rate will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
             &lt;double&gt; = 	The lambda regularization constant (default = 0.0001)<br/>-E
-            &lt;integer&gt; = 	The number of epochs to perform (batch learning only, default
-            = 500)<br/>-N = 	Don't normalize the data<br/>-M = 	Don't replace missing
-            values
+            &lt;integer&gt; = 	The number of epochs to perform (batch learning only,
+            default = 500)<br/>-C &lt;double&gt; = 	The epsilon threshold
+            (epsilon-insenstive and Huber loss only, default = 1e-3)<br/>-N = 	Don't normalize the
+            data<br/>-M = 	Don't replace missing values
             </summary>
         </member>
         <member name="M:PicNetML.Clss.MultiClassClassifierUpdateable.Method(PicNetML.Clss.MultiClassClassifierUpdateable.EMethod)">
@@ -5402,20 +5749,24 @@
         <member name="T:PicNetML.Clss.SGD">
             <summary>
             Implements stochastic gradient descent for learning various linear models
-            (binary class SVM, binary class logistic regression and linear
-            regression). Globally replaces all missing values and transforms nominal attributes
-            into binary ones. It also normalizes all attributes, so the coefficients in
-            the output are based on the normalized data.<br/>For numeric class
-            attributes, the squared loss function (2) must be
-            used.<br/><br/>Options:<br/><br/>-F = 	Set the loss function to minimize. 0 = hinge loss (SVM), 1 = log loss
-            (logistic regression),<br/>	2 = squared loss (regression).<br/>	(default =
-            0)<br/>-L = 	The learning rate. If normalization is<br/>	turned off (as it
-            is automatically for streaming data), then the<br/>	default learning rate
-            will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
-            &lt;double&gt; = 	The lambda regularization constant (default = 0.0001)<br/>-E
-            &lt;integer&gt; = 	The number of epochs to perform (batch learning only,
-            default = 500)<br/>-N = 	Don't normalize the data<br/>-M = 	Don't replace missing
-            values
+            (binary class SVM, binary class logistic regression, squared loss, Huber
+            loss and epsilon-insensitive loss linear regression). Globally replaces all
+            missing values and transforms nominal attributes into binary ones. It also
+            normalizes all attributes, so the coefficients in the output are based on
+            the normalized data.<br/>For numeric class attributes, the squared, Huber or
+            epsilon-insensitve loss function must be used. Epsilon-insensitive and
+            Huber loss may require a much higher learning
+            rate.<br/><br/>Options:<br/><br/>-F = 	Set the loss function to minimize.<br/>	0 = hinge loss (SVM), 1 =
+            log loss (logistic regression),<br/>	2 = squared loss (regression), 3 =
+            epsilon insensitive loss (regression),<br/>	4 = Huber loss
+            (regression).<br/>	(default = 0)<br/>-L = 	The learning rate. If normalization is<br/>	turned
+            off (as it is automatically for streaming data), then the<br/>	default
+            learning rate will need to be reduced (try 0.0001).<br/>	(default = 0.01).<br/>-R
+            &lt;double&gt; = 	The lambda regularization constant (default =
+            0.0001)<br/>-E &lt;integer&gt; = 	The number of epochs to perform (batch learning
+            only, default = 500)<br/>-C &lt;double&gt; = 	The epsilon threshold
+            (epsilon-insenstive and Huber loss only, default = 1e-3)<br/>-N = 	Don't normalize
+            the data<br/>-M = 	Don't replace missing values
             </summary>
         </member>
         <member name="M:PicNetML.Clss.SGD.LossFunction(PicNetML.Clss.SGD.ELossFunction)">
@@ -5440,6 +5791,14 @@
             <summary>
             The number of epochs to perform (batch learning). The total number of
             iterations is epochs * num instances.
+            </summary>    
+        </member>
+        <member name="M:PicNetML.Clss.SGD.Epsilon(System.Double)">
+            <summary>
+            The epsilon threshold for epsilon insensitive and Huber loss. An error
+            with absolute value less that this threshold has loss of 0 for epsilon
+            insensitive loss. For Huber loss this is the boundary between the quadratic and
+            linear parts of the loss function.
             </summary>    
         </member>
         <member name="M:PicNetML.Clss.SGD.DontNormalize(System.Boolean)">
@@ -6033,11 +6392,11 @@
             weka.clusterers.SimpleKMeans)<br/><br/>Options specific to clusterer weka.clusterers.SimpleKMeans: = <br/>-N
             &lt;num&gt; = 	number of clusters.<br/>	(default 2).<br/>-P = 	Initialize using
             the k-means++ method.<br/><br/>-V = 	Display std. deviations for
-            centroids.<br/><br/>-M = 	Replace missing values with mean/mode.<br/><br/>-A
+            centroids.<br/><br/>-M = 	Don't replace missing values with mean/mode.<br/><br/>-A
             &lt;classname and options&gt; = 	Distance function to use.<br/>	(default:
             weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum number of
-            iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables faster
-            distance calculations, using cut-off values.<br/>	Disables the
+            iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables
+            faster distance calculations, using cut-off values.<br/>	Disables the
             calculation/output of squared errors/distances.<br/><br/>-num-slots &lt;num&gt; =
             	Number of execution slots.<br/>	(default 1 - i.e. no parallelism)<br/>-S
             &lt;num&gt; = 	Random number seed.<br/>	(default 10)
@@ -6070,12 +6429,12 @@
             specific to clusterer weka.clusterers.SimpleKMeans: = <br/>-N &lt;num&gt; =
             	number of clusters.<br/>	(default 2).<br/>-P = 	Initialize using the
             k-means++ method.<br/><br/>-V = 	Display std. deviations for centroids.<br/><br/>-M
-            = 	Replace missing values with mean/mode.<br/><br/>-A &lt;classname and
-            options&gt; = 	Distance function to use.<br/>	(default:
-            weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum number of iterations.<br/><br/>-O =
-            	Preserve order of instances.<br/><br/>-fast = 	Enables faster distance
-            calculations, using cut-off values.<br/>	Disables the calculation/output of
-            squared errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of
+            = 	Don't replace missing values with mean/mode.<br/><br/>-A &lt;classname
+            and options&gt; = 	Distance function to use.<br/>	(default:
+            weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum number of
+            iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables faster
+            distance calculations, using cut-off values.<br/>	Disables the calculation/output
+            of squared errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of
             execution slots.<br/>	(default 1 - i.e. no parallelism)<br/>-S &lt;num&gt; =
             	Random number seed.<br/>	(default 10)
             </summary>
@@ -6090,14 +6449,15 @@
             annual ACM-SIAM symposium on Discrete algorithms, 1027-1035,
             2007.<br/><br/>Options:<br/><br/>-N &lt;num&gt; = 	number of clusters.<br/>	(default
             2).<br/>-P = 	Initialize using the k-means++ method.<br/><br/>-V = 	Display std.
-            deviations for centroids.<br/><br/>-M = 	Replace missing values with
-            mean/mode.<br/><br/>-A &lt;classname and options&gt; = 	Distance function to
-            use.<br/>	(default: weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum
-            number of iterations.<br/><br/>-O = 	Preserve order of
+            deviations for centroids.<br/><br/>-M = 	Don't replace missing values with
+            mean/mode.<br/><br/>-A &lt;classname and options&gt; = 	Distance function
+            to use.<br/>	(default: weka.core.EuclideanDistance)<br/>-I &lt;num&gt; =
+            	Maximum number of iterations.<br/><br/>-O = 	Preserve order of
             instances.<br/><br/>-fast = 	Enables faster distance calculations, using cut-off
             values.<br/>	Disables the calculation/output of squared
-            errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of execution slots.<br/>	(default 1 - i.e. no
-            parallelism)<br/>-S &lt;num&gt; = 	Random number seed.<br/>	(default 10)
+            errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of execution slots.<br/>	(default 1 -
+            i.e. no parallelism)<br/>-S &lt;num&gt; = 	Random number seed.<br/>	(default
+            10)
             </summary>
         </member>
         <member name="T:PicNetML.Clstr.Cobweb">
@@ -6260,11 +6620,11 @@
             weka.clusterers.SimpleKMeans)<br/><br/>Options specific to clusterer weka.clusterers.SimpleKMeans: = <br/>-N
             &lt;num&gt; = 	number of clusters.<br/>	(default 2).<br/>-P = 	Initialize using
             the k-means++ method.<br/><br/>-V = 	Display std. deviations for
-            centroids.<br/><br/>-M = 	Replace missing values with mean/mode.<br/><br/>-A
+            centroids.<br/><br/>-M = 	Don't replace missing values with mean/mode.<br/><br/>-A
             &lt;classname and options&gt; = 	Distance function to use.<br/>	(default:
             weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum number of
-            iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables faster
-            distance calculations, using cut-off values.<br/>	Disables the
+            iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables
+            faster distance calculations, using cut-off values.<br/>	Disables the
             calculation/output of squared errors/distances.<br/><br/>-num-slots &lt;num&gt; =
             	Number of execution slots.<br/>	(default 1 - i.e. no parallelism)<br/>-S
             &lt;num&gt; = 	Random number seed.<br/>	(default 10)
@@ -6359,12 +6719,12 @@
             specific to clusterer weka.clusterers.SimpleKMeans: = <br/>-N &lt;num&gt; =
             	number of clusters.<br/>	(default 2).<br/>-P = 	Initialize using the
             k-means++ method.<br/><br/>-V = 	Display std. deviations for centroids.<br/><br/>-M
-            = 	Replace missing values with mean/mode.<br/><br/>-A &lt;classname and
-            options&gt; = 	Distance function to use.<br/>	(default:
-            weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum number of iterations.<br/><br/>-O =
-            	Preserve order of instances.<br/><br/>-fast = 	Enables faster distance
-            calculations, using cut-off values.<br/>	Disables the calculation/output of
-            squared errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of
+            = 	Don't replace missing values with mean/mode.<br/><br/>-A &lt;classname
+            and options&gt; = 	Distance function to use.<br/>	(default:
+            weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum number of
+            iterations.<br/><br/>-O = 	Preserve order of instances.<br/><br/>-fast = 	Enables faster
+            distance calculations, using cut-off values.<br/>	Disables the calculation/output
+            of squared errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of
             execution slots.<br/>	(default 1 - i.e. no parallelism)<br/>-S &lt;num&gt; =
             	Random number seed.<br/>	(default 10)
             </summary>
@@ -6394,14 +6754,15 @@
             annual ACM-SIAM symposium on Discrete algorithms, 1027-1035,
             2007.<br/><br/>Options:<br/><br/>-N &lt;num&gt; = 	number of clusters.<br/>	(default
             2).<br/>-P = 	Initialize using the k-means++ method.<br/><br/>-V = 	Display std.
-            deviations for centroids.<br/><br/>-M = 	Replace missing values with
-            mean/mode.<br/><br/>-A &lt;classname and options&gt; = 	Distance function to
-            use.<br/>	(default: weka.core.EuclideanDistance)<br/>-I &lt;num&gt; = 	Maximum
-            number of iterations.<br/><br/>-O = 	Preserve order of
+            deviations for centroids.<br/><br/>-M = 	Don't replace missing values with
+            mean/mode.<br/><br/>-A &lt;classname and options&gt; = 	Distance function
+            to use.<br/>	(default: weka.core.EuclideanDistance)<br/>-I &lt;num&gt; =
+            	Maximum number of iterations.<br/><br/>-O = 	Preserve order of
             instances.<br/><br/>-fast = 	Enables faster distance calculations, using cut-off
             values.<br/>	Disables the calculation/output of squared
-            errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of execution slots.<br/>	(default 1 - i.e. no
-            parallelism)<br/>-S &lt;num&gt; = 	Random number seed.<br/>	(default 10)
+            errors/distances.<br/><br/>-num-slots &lt;num&gt; = 	Number of execution slots.<br/>	(default 1 -
+            i.e. no parallelism)<br/>-S &lt;num&gt; = 	Random number seed.<br/>	(default
+            10)
             </summary>
         </member>
         <member name="M:PicNetML.Clstr.SimpleKMeans.NumClusters(System.Int32)">
@@ -6720,14 +7081,20 @@
             evaluator.<br/>	eg. -E "weka.attributeSelection.CfsSubsetEval -L"<br/><br/>Options
             specific to evaluator weka.attributeSelection.CfsSubsetEval: = <br/>-M = 	Treat
             missing values as a separate value.<br/>-L = 	Don't include locally
-            predictive attributes.<br/><br/>Options specific to search
-            weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; = 	Specify a starting set of
-            attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward | 1 = forward | 2 =
-            bi-directional&gt; = 	Direction of search. (default = 1).<br/>-N &lt;num&gt; =
-            	Number of non-improving nodes to<br/>	consider before terminating
-            search.<br/>-S &lt;num&gt; = 	Size of lookup cache for evaluated
-            subsets.<br/>	Expressed as a multiple of the number of<br/>	attributes in the data set. (default
-            = 1)
+            predictive attributes.<br/>-Z = 	Precompute the full correlation matrix at the
+            outset, rather than compute correlations lazily (as needed) during the search.
+            Use this in conjuction with parallel processing in order to speed up a
+            backward search.<br/>-P &lt;int&gt; = 	The size of the thread pool, for
+            example, the number of cores in the CPU. (default 1)<br/><br/>-E &lt;int&gt; =
+            	The number of threads to use, which should be >= size of thread pool.
+            (default 1)<br/><br/>-D = 	Output debugging info.<br/><br/>Options specific to
+            search weka.attributeSelection.BestFirst: = <br/>-P &lt;start set&gt; =
+            	Specify a starting set of attributes.<br/>	Eg. 1,3,5-7.<br/>-D &lt;0 = backward
+            | 1 = forward | 2 = bi-directional&gt; = 	Direction of search. (default =
+            1).<br/>-N &lt;num&gt; = 	Number of non-improving nodes to<br/>	consider
+            before terminating search.<br/>-S &lt;num&gt; = 	Size of lookup cache for
+            evaluated subsets.<br/>	Expressed as a multiple of the number
+            of<br/>	attributes in the data set. (default = 1)
             </summary>
         </member>
         <member name="M:PicNetML.Fltr.AttributeSelection.Evaluator(PicNetML.AttrSel.Evals.BaseAttributeSelectionEvaluator{weka.attributeSelection.ASEvaluation})">

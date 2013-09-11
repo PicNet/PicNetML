@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using java.lang;
 using weka.core;
 
 namespace PicNetML
@@ -20,7 +21,10 @@ namespace PicNetML
       var num = source.numAttributes();
       var arr = new string[num];      
       for (int i = 0; i < num; i++) {
-        arr[i] = source.stringValue(i);
+        // Nominal, String, Date
+        try { arr[i] = source.stringValue(i); }
+        // Numerics
+        catch (IllegalArgumentException) { arr[i] = source.value(i).ToString(); }
       }
       return arr;
     }

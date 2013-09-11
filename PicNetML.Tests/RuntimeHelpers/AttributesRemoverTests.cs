@@ -9,7 +9,7 @@ namespace PicNetML.Tests.RuntimeHelpers
   {
     [Test] public void test_removing_attributes_by_index()
     {
-      var rt = Runtime.LoadFromFile<TitanicDataRow>(0, TestingHelpers.GetResourceFileName("titanic_train.csv"));
+      var rt = TestingHelpers.LoadSmallRuntime<TitanicDataRow>("titanic_train.csv", 0, 3);
       var ar = new AttributesRemover(rt);
       var initial = rt.EnumerateAttributes.Select(a => a.Name).ToArray();
       ar.RemoveAttributes(2, 3);
@@ -20,7 +20,7 @@ namespace PicNetML.Tests.RuntimeHelpers
 
     [Test] public void test_removing_attributes_by_names()
     {
-      var rt = Runtime.LoadFromFile<TitanicDataRow>(0, TestingHelpers.GetResourceFileName("titanic_train.csv"));
+      var rt = TestingHelpers.LoadSmallRuntime<TitanicDataRow>("titanic_train.csv", 0, 3);
       var ar = new AttributesRemover(rt);
       var initial = rt.EnumerateAttributes.Select(a => a.Name).ToArray();
       ar.RemoveAttributes("embarked", "sex");
@@ -31,7 +31,7 @@ namespace PicNetML.Tests.RuntimeHelpers
 
     [Test] public void test_keep_attributes_by_index()
     {
-      var rt = Runtime.LoadFromFile<TitanicDataRow>(0, TestingHelpers.GetResourceFileName("titanic_train.csv"));
+      var rt = TestingHelpers.LoadSmallRuntime<TitanicDataRow>("titanic_train.csv", 0, 3);
       var ar = new AttributesRemover(rt);
       var initial = rt.EnumerateAttributes.Select(a => a.Name).ToArray();
       ar.KeepAttributes(0, 2, 3);
@@ -42,7 +42,7 @@ namespace PicNetML.Tests.RuntimeHelpers
 
     [Test] public void test_keep_attributes_by_names()
     {
-      var rt = Runtime.LoadFromFile<TitanicDataRow>(0, TestingHelpers.GetResourceFileName("titanic_train.csv"));
+      var rt = TestingHelpers.LoadSmallRuntime<TitanicDataRow>("titanic_train.csv", 0, 3);
       var ar = new AttributesRemover(rt);
       var initial = rt.EnumerateAttributes.Select(a => a.Name).ToArray();
       ar.KeepAttributes("survived", "embarked", "sex");
