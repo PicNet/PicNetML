@@ -111,7 +111,7 @@
   <ItemGroup>
     <ProjectReference Include="..\PicNetML\PicNetML.csproj">
       <Project>{2c9fa409-7208-4c37-a707-cccfac9e9020}</Project>
-      <Name>PicNetML %28PicNetML\PicNetML%29</Name>
+      <Name>PicNetML</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

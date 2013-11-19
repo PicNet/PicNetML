@@ -73,17 +73,17 @@ namespace PicNetML
       return this;
     }
 
-    public ExtendableObj<T> AddNumerical(string name, double value) {
+    public ExtendableObj<T> AddNumerical(string name, double? value) {
       AddProperty(name, EAttributeType.Numeric, value);
       return this;
     }
 
-    public ExtendableObj<T> AddBinary(string name, bool value) {
+    public ExtendableObj<T> AddBinary(string name, bool? value) {
       AddProperty(name, EAttributeType.Binary, value);
       return this;
     }
 
-    public ExtendableObj<T> AddDate(string name, DateTime value) {
+    public ExtendableObj<T> AddDate(string name, DateTime? value) {
       AddProperty(name, EAttributeType.Date, value);
       return this;
     }    
