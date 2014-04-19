@@ -42,7 +42,7 @@ namespace PicNetML.Arff
             catch 
             {
               Console.WriteLine("Could not parse row " + csv.CurrentRecordIndex + 
-                  " field: " + i + " = '" + csv[i] + "'");
+                  " field: " + i + " (" + field.Name + ") = '" + csv[i] + "'");
               throw;
             }
           }
