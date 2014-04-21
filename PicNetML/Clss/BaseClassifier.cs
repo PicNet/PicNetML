@@ -4,9 +4,7 @@ using weka.classifiers;
 
 namespace PicNetML.Clss {
   public class BaseClassifier<I> : UntypedBaseClassifier<I>, IBaseClassifier<I> where I : Classifier {
-    public Runtime Runtime { get; private set; }
-    public bool Built { get; set; }
-
+    
     public BaseClassifier(Runtime rt, I impl) : base(impl) {
       if (rt == null) throw new ArgumentNullException("rt");
       Runtime = rt;

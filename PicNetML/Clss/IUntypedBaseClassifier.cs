@@ -4,6 +4,8 @@ using weka.classifiers;
 
 namespace PicNetML.Clss {
   public interface IUntypedBaseClassifier<out I> where I : Classifier {    
+    Runtime Runtime { get; }
+    bool Built { get; set; }
     I Impl { get; }    
     
     double ClassifyInstance(PmlInstance instance);

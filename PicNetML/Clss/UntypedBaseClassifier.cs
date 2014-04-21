@@ -8,7 +8,9 @@ using weka.core;
 namespace PicNetML.Clss
 {
   public abstract class UntypedBaseClassifier<I> : IUntypedBaseClassifier<I> where I : Classifier
-  {        
+  {
+    public Runtime Runtime { get; protected set; }
+    public bool Built { get; set; }
     public I Impl { get; private set; }
 
     protected UntypedBaseClassifier(I impl)

@@ -4,6 +4,7 @@ using System.Linq;
 using PicNetML.Clss;
 using PicNetML.RuntimeHelpers;
 using weka.classifiers;
+using RandomForest = weka.classifiers.trees.RandomForest;
 
 namespace PicNetML
 {
@@ -17,7 +18,7 @@ namespace PicNetML
 
     public List<string> GeneratePredictions(
         Func<double, int, string> outputline,
-        IBaseClassifier<Classifier> classifier,
+        IUntypedBaseClassifier<Classifier> classifier,
         string logfile = null, 
         Func<int, double> exception_value = null,
         bool quiet = false) {

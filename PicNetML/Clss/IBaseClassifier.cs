@@ -2,9 +2,6 @@ using weka.classifiers;
 
 namespace PicNetML.Clss {
   public interface IBaseClassifier<out I> : IUntypedBaseClassifier<I> where I : Classifier {
-    Runtime Runtime { get; }
-    bool Built { get; set; }
-
     double ClassifyRow<T>(T o) where T : new();
     double ClassifyRowProba<T>(T o) where T : new();
 

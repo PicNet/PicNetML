@@ -14,7 +14,7 @@ namespace PicNetML.RuntimeHelpers
 
     internal List<string> GeneratePredictionsImpl(
           Func<double, int, string> outputline, 
-          IBaseClassifier<Classifier> classifier, 
+          IUntypedBaseClassifier<Classifier> classifier, 
           string logfile = null, 
           Func<int, double> exception_value = null,
           bool quiet = false) {
