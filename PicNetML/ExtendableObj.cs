@@ -64,12 +64,12 @@ namespace PicNetML
     public T BaseObject { get; private set; }     
     
     public ExtendableObj<T> AddString(string name, string value) {
-      AddProperty(name, EAttributeType.String, value);
+      AddProperty(name, EAttributeType.String, value ?? String.Empty);
       return this;
     }
 
     public ExtendableObj<T> AddNominal(string name, string value) {
-      AddProperty(name, EAttributeType.Nominal, value);
+      AddProperty(name, EAttributeType.Nominal, value ?? String.Empty);
       return this;
     }
 
